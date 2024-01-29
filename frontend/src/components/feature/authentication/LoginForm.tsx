@@ -1,21 +1,20 @@
 "use client"
 import { useRef, useState, useEffect } from 'react';
-//import axios from "@/app/services/api/axios";
 const LOGIN_URL = '/auth';
-//import { useloginContext } from "../../services/context/context";
+import { useShopContext } from "@/services/providers/ShopContext";
 import Link from 'next/link'
+import Input from '@/components/UI/authentication/Input';
+import axios from '@/services/api/axiosConfig';
+import { initLoginObj } from '@/services/initConfig';
 
 export default function LoginForm() {
 
-    //const { setAuth } = useloginContext();
+    const { setAuth } = useShopContext();
+
+    const [loginObj, setLoginObj] = useState<loginObjT>(initLoginObj);
 
     const userRef = useRef<HTMLInputElement | null>(null);
     const errRef = useRef<HTMLParagraphElement | null>(null);
-
-    const [user, setUser] = useState('');
-    const [pwd, setPwd] = useState('');
-    const [errMsg, setErrMsg] = useState('');
-    const [success, setSuccess] = useState(false);
 
     useEffect(() => {
         const currentElement = userRef.current;
@@ -27,15 +26,29 @@ export default function LoginForm() {
     }, [])
 
     useEffect(() => {
-        setErrMsg('');
-    }, [user, pwd])
+        setLoginObj({
+            ...loginObj,
+            'errMsg': ''
+        })
+    }, [loginObj.user, loginObj.pwd])
 
+    const handleLoginChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setLoginObj({
+            ...loginObj,
+            [e.target.name]: e.target.value
+        });
+    }
+
+    console.log(loginObj)
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-       /*  try {
+        try {
             const response = await axios.post(LOGIN_URL,
-                JSON.stringify({ user, pwd }),
+                JSON.stringify({
+                    user: loginObj.user,
+                    pwd: loginObj.pwd
+                }),
                 {
                     headers: { 'Content-Type': 'application/json' },
                     withCredentials: true
@@ -45,19 +58,40 @@ export default function LoginForm() {
             console.log(JSON.stringify(response));
             const accessToken = response?.data?.accessToken;
             const roles = response?.data?.roles;
-            setAuth({ user, pwd, roles, accessToken });
-            setUser('');
-            setPwd('');
-            setSuccess(true);
+            setAuth({
+                user: loginObj.user,
+                pwd: loginObj.pwd,
+                roles,
+                accessToken
+            });
+            setLoginObj({
+                ...loginObj,
+                'user': '',
+                'pwd': '',
+                'success': true,
+            });
         } catch (err: any) {
             if (!err?.response) {
-                setErrMsg('No Server Response');
+                setLoginObj({
+                    ...loginObj,
+                    errMsg: 'No Server Response'
+                });
             } else if (err.response?.status === 400) {
-                setErrMsg('Missing Username or Password');
+                setLoginObj({
+                    ...loginObj,
+                    errMsg: 'Missing Username or Password'
+                });
+
             } else if (err.response?.status === 401) {
-                setErrMsg('Unauthorized');
+                setLoginObj({
+                    ...loginObj,
+                    errMsg: 'Unauthorized'
+                });
             } else {
-                setErrMsg('Login Failed');
+                setLoginObj({
+                    ...loginObj,
+                    errMsg: 'Login Failed'
+                });
             }
             const currentElement = userRef.current;
             // Ellenőrizzük, hogy currentElement nem null és típusa HTMLElement
@@ -65,12 +99,13 @@ export default function LoginForm() {
                 // Biztosítjuk, hogy a `focus` metódus a HTMLElement típuson elérhető.
                 currentElement.focus();
             }
-        } */
+        }
     }
+
 
     return (
         <>
-            {success ? (
+            {loginObj.success ? (
                 <section>
                     <h1>You are logged in!</h1>
                     <br />
@@ -80,29 +115,59 @@ export default function LoginForm() {
                 </section>
             ) : (
                 <section>
-                    <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-                    <h1>Sign In</h1>
-                    <form onSubmit={handleSubmit}>
-                        <label htmlFor="username">Username:</label>
-                        <input
-                            type="text"
+                    <p
+                        ref={errRef}
+                        className={loginObj.errMsg ? "errmsg" : "offscreen"}
+                        aria-live="assertive">{loginObj.errMsg}
+                    </p>
+
+                    <h1 className="text-xl pb-7 font-bold leading-tight tracking-tight md:text-2xl text-white">
+                        Sign in to your account
+                    </h1>
+                    <form
+                        className="space-y-4 md:space-y-6"
+                        onSubmit={handleSubmit}>
+                        <Input
+                            label="Username"
                             id="username"
-                            ref={userRef}
+                            type='text'
+                            name='user'
+                            inputRef={userRef}
                             autoComplete="off"
-                            onChange={(e) => setUser(e.target.value)}
-                            value={user}
+                            onChange={handleLoginChange}
+                            value={loginObj.user}
+                            required
+                        />
+                        <Input
+                            label="password"
+                            id="password"
+                            type='password'
+                            name='pwd'
+                            onChange={handleLoginChange}
+                            value={loginObj.pwd}
                             required
                         />
 
-                        <label htmlFor="password">Password:</label>
-                        <input
-                            type="password"
-                            id="password"
-                            onChange={(e) => setPwd(e.target.value)}
-                            value={pwd}
-                            required
-                        />
-                        <button className='border-solid border-2'>Sign In</button>
+                        <div className="flex items-center justify-between">
+                            <div className="flex items-start">
+                                <div className="flex items-center h-5">
+                                    <input
+                                        id="remember"
+                                        aria-describedby="remember"
+                                        type="checkbox"
+                                        className="w-4 h-4 border rounded focus:ring-1 bg-gray-700 border-gray-600 focus:ring-primary-600 ring-offset-primary-800"
+                                    />
+                                </div>
+                                <div className="ml-3 text-sm">
+                                    <label htmlFor="remember" className="text-gray-300">Remember me</label>
+                                </div>
+                            </div>
+                            <a href="#" className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Forgot password?</a>
+                        </div>
+
+                        <button
+                            type="submit"
+                            className="w-full text-white focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-primary-600 hover:bg-primary-700 focus:ring-primary-800">Sign In</button>
                     </form>
                     <p>
                         Need an Account?<br />
@@ -111,8 +176,9 @@ export default function LoginForm() {
                             <a href="#">Sign Up</a>
                         </span>
                     </p>
-                </section>
-            )}
+                </section >
+            )
+            }
         </>
     )
 }

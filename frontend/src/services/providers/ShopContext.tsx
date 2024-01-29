@@ -9,7 +9,10 @@ import React, {
     ChangeEvent,
 } from "react";
 
-import { initUiObj } from "../initConfig";
+import {
+    initUiObj,
+    initAuth
+} from "../initConfig";
 
 type ShopProviderProps = {
     children: ReactNode;
@@ -17,6 +20,7 @@ type ShopProviderProps = {
 
 
 interface ShopContextProps {
+    setAuth: React.Dispatch<React.SetStateAction<authT>>;
     handleChangeUIObj: (key: string, value: boolean) => void;
     uiObj: uiObjT;
 };
@@ -33,6 +37,7 @@ export const ShopProvider: React.FC<ShopProviderProps> = ({
 
     const [uiObj, setUiObj] = useState<uiObjT>(initUiObj)
 
+
     const handleChangeUIObj = (key: string, value: boolean): void => {
         setUiObj({
             ...uiObj,
@@ -40,9 +45,12 @@ export const ShopProvider: React.FC<ShopProviderProps> = ({
         });
     }
 
+    const [auth, setAuth] = useState<authT>(initAuth);
+
     const contextValue: ShopContextProps = {
         handleChangeUIObj,
         uiObj,
+        setAuth,
     };
 
     console.log(uiObj)

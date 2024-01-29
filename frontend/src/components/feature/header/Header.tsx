@@ -21,14 +21,6 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import Image from 'next/image';
 import logo from '@/assets/logo.png'
 
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-const darkTheme = createTheme({
-    palette: {
-        mode: 'dark',
-    },
-});
-
 import { useShopContext } from '@/services/providers/ShopContext';
 
 
@@ -65,102 +57,102 @@ function ResponsiveAppBar() {
         }; */
 
     return (
-        <ThemeProvider theme={darkTheme}>
-            <AppBar position="static">
-                <Container maxWidth="xl">
-                    <Toolbar sx={{ display: { xs: 'flex' }, justifyContent: 'space-between' }} disableGutters>
 
-                        <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} className="max-w-40">
-                            <Image
-                                src={logo}
-                                alt="Description of the image"
-                                className="w-full h-auto"
-                                priority
-                            />
-                        </Box>
+        <AppBar position="static">
+            <Container maxWidth="xl">
+                <Toolbar sx={{ display: { xs: 'flex' }, justifyContent: 'space-between' }} disableGutters>
 
-                        <Box sx={
-                            {
-                                maxWidth: '48px',
-                                flexGrow: 1, display: { xs: 'flex', md: 'none' }
-                            }}>
-                            <IconButton
-                                size="large"
-                                aria-label="account of current user"
-                                aria-controls="menu-appbar"
-                                aria-haspopup="true"
-                                onClick={handleOpenNavMenu}
-                                color="inherit"
-                            >
-                                <MenuIcon />
-                            </IconButton>
-                            <Menu
+                    <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} className="max-w-40">
+                        <Image
+                            src={logo}
+                            alt="Description of the image"
+                            className="w-full h-auto"
+                            priority
+                        />
+                    </Box>
 
-                                id="menu-appbar"
-                                anchorEl={anchorElNav}
-                                anchorOrigin={{
-                                    vertical: 'bottom',
-                                    horizontal: 'left',
-                                }}
-                                keepMounted
-                                transformOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'left',
-                                }}
-                                open={Boolean(anchorElNav)}
-                                onClose={handleCloseNavMenu}
-                                sx={{
-                                    justifyContent: 'center',
-                                    display: { xs: 'block', md: 'none' },
-                                }}
-                            >
-                                {pages.map((page) => (
-                                    <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                        <Typography textAlign="center">{page}</Typography>
-                                    </MenuItem>
-                                ))}
-                            </Menu>
-                        </Box>
+                    <Box sx={
+                        {
+                            maxWidth: '48px',
+                            flexGrow: 1, display: { xs: 'flex', md: 'none' }
+                        }}>
+                        <IconButton
+                            size="large"
+                            aria-label="account of current user"
+                            aria-controls="menu-appbar"
+                            aria-haspopup="true"
+                            onClick={handleOpenNavMenu}
+                            color="inherit"
+                        >
+                            <MenuIcon />
+                        </IconButton>
+                        <Menu
 
-                        <Box sx={{
-                            display: {
-                                xs: 'flex', justifyContent: 'center',
-                                alignItems: 'center',
-                                flexGrow: 1, md: 'none'
-                            }, mr: 1
-                        }} className="max-w-40" >
-                            <Image
-                                src={logo}
-                                alt="logo"
-                                className="w-full h-auto"
-                                priority
-                            />
-                        </Box>
-
-                        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'center' }}>
+                            id="menu-appbar"
+                            anchorEl={anchorElNav}
+                            anchorOrigin={{
+                                vertical: 'bottom',
+                                horizontal: 'left',
+                            }}
+                            keepMounted
+                            transformOrigin={{
+                                vertical: 'top',
+                                horizontal: 'left',
+                            }}
+                            open={Boolean(anchorElNav)}
+                            onClose={handleCloseNavMenu}
+                            sx={{
+                                justifyContent: 'center',
+                                display: { xs: 'block', md: 'none' },
+                            }}
+                        >
                             {pages.map((page) => (
-                                <Button
-                                    key={page}
-                                    onClick={handleCloseNavMenu}
-                                    sx={{ my: 2, color: 'white', display: 'block' }}
-                                >
-                                    {page}
-                                </Button>
+                                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                                    <Typography textAlign="center">{page}</Typography>
+                                </MenuItem>
                             ))}
-                        </Box>
+                        </Menu>
+                    </Box>
 
-                        <Box sx={{ display: 'flex', flexGrow: 0 }}>
-                            <PersonIcon
-                                fontSize="large" sx={{ marginRight: 2 }}
-                                onClick={handleCloseUserMenu} />
-                            <FavoriteIcon
-                                fontSize="large" sx={{ marginRight: 2 }} />
-                            <ShoppingCartIcon
-                                fontSize="large" sx={{ marginRight: 2 }} />
-                        </Box>
+                    <Box sx={{
+                        display: {
+                            xs: 'flex', justifyContent: 'center',
+                            alignItems: 'center',
+                            flexGrow: 1, md: 'none'
+                        }, mr: 1
+                    }} className="max-w-40" >
+                        <Image
+                            src={logo}
+                            alt="logo"
+                            className="w-full h-auto"
+                            priority
+                        />
+                    </Box>
+
+                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'center' }}>
+                        {pages.map((page) => (
+                            <Button
+                                key={page}
+                                onClick={handleCloseNavMenu}
+                                sx={{ my: 2, color: 'white', display: 'block' }}
+                            >
+                                {page}
+                            </Button>
+                        ))}
+                    </Box>
+
+                    <Box sx={{ display: 'flex', flexGrow: 0 }}>
+                        <PersonIcon
+                            fontSize="large" sx={{ marginRight: 2 }}
+                            onClick={handleCloseUserMenu} />
+                        <FavoriteIcon
+                            fontSize="large" sx={{ marginRight: 2 }} />
+                        <ShoppingCartIcon
+                            fontSize="large" sx={{ marginRight: 2 }} />
+                    </Box>
 
 
-                        {/* <Box sx={{ flexGrow: 0 }}>
+                    {/* <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -189,10 +181,10 @@ function ResponsiveAppBar() {
                             ))}
                         </Menu>
                     </Box> */}
-                    </Toolbar>
-                </Container>
-            </AppBar>
-        </ThemeProvider>
+                </Toolbar>
+            </Container>
+        </AppBar>
+
     );
 }
 export default ResponsiveAppBar;

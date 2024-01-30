@@ -1,68 +1,44 @@
 "use client"
 
 import { useState } from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
+import {
+    AppBar,
+    Box,
+    Toolbar,
+    IconButton,
+    Typography,
+    Menu,
+    Button,
+    MenuItem,
+    Container,
+} from '@mui/material/';
 import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
-
-import PersonIcon from '@mui/icons-material/Person';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-
 import Image from 'next/image';
 import logo from '@/assets/logo.png'
 
-import { useShopContext } from '@/services/providers/ShopContext';
-
+import HeaderControllerIcon from '@/components/UI/header/HeaderControllerIcon';
 
 const pages = ['Botok', 'Kiegészítők', 'Orsók', 'Zsinórok'];
-const settings = ['Profile', 'Rendeléseim', 'Kijelentkezés'];
-const login = false;
 
-function ResponsiveAppBar() {
+export default function ResponsiveAppBar() {
     const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
-    const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
-
-    const { handleChangeUIObj } = useShopContext();
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
-    };
-    const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorElUser(event.currentTarget);
     };
 
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
     };
 
-    const handleCloseUserMenu = () => {
-        console.log("lefutottam");
-        handleChangeUIObj('loginModal', true)
-
-    }
-
-    /* 
-        const handleCloseUserMenu = () => {
-            setAnchorElUser(null);
-        }; */
-
     return (
-
         <AppBar position="static">
             <Container maxWidth="xl">
                 <Toolbar sx={{ display: { xs: 'flex' }, justifyContent: 'space-between' }} disableGutters>
-
-                    <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} className="max-w-40">
+                    <Box sx={{
+                        maxWidth: '150px',
+                        display: { xs: 'none', md: 'flex' }, mr: 1
+                    }} >
                         <Image
                             src={logo}
                             alt="Description of the image"
@@ -70,7 +46,6 @@ function ResponsiveAppBar() {
                             priority
                         />
                     </Box>
-
                     <Box sx={
                         {
                             maxWidth: '48px',
@@ -87,7 +62,6 @@ function ResponsiveAppBar() {
                             <MenuIcon />
                         </IconButton>
                         <Menu
-
                             id="menu-appbar"
                             anchorEl={anchorElNav}
                             anchorOrigin={{
@@ -113,14 +87,14 @@ function ResponsiveAppBar() {
                             ))}
                         </Menu>
                     </Box>
-
                     <Box sx={{
+                        maxWidth: '100px',
                         display: {
                             xs: 'flex', justifyContent: 'center',
                             alignItems: 'center',
                             flexGrow: 1, md: 'none'
                         }, mr: 1
-                    }} className="max-w-40" >
+                    }}>
                         <Image
                             src={logo}
                             alt="logo"
@@ -128,7 +102,6 @@ function ResponsiveAppBar() {
                             priority
                         />
                     </Box>
-
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'center' }}>
                         {pages.map((page) => (
                             <Button
@@ -140,51 +113,9 @@ function ResponsiveAppBar() {
                             </Button>
                         ))}
                     </Box>
-
-                    <Box sx={{ display: 'flex', flexGrow: 0 }}>
-                        <PersonIcon
-                            fontSize="large" sx={{ marginRight: 2 }}
-                            onClick={handleCloseUserMenu} />
-                        <FavoriteIcon
-                            fontSize="large" sx={{ marginRight: 2 }} />
-                        <ShoppingCartIcon
-                            fontSize="large" sx={{ marginRight: 2 }} />
-                    </Box>
-
-
-                    {/* <Box sx={{ flexGrow: 0 }}>
-                        <Tooltip title="Open settings">
-                            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                            </IconButton>
-                        </Tooltip>
-                        <Menu
-                            sx={{ mt: '45px' }}
-                            id="menu-appbar"
-                            anchorEl={anchorElUser}
-                            anchorOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            open={Boolean(anchorElUser)}
-                            onClose={handleCloseUserMenu}
-                        >
-                            {settings.map((setting) => (
-                                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                    <Typography textAlign="center">{setting}</Typography>
-                                </MenuItem>
-                            ))}
-                        </Menu>
-                    </Box> */}
+                    <HeaderControllerIcon />
                 </Toolbar>
             </Container>
-        </AppBar>
-
+        </AppBar >
     );
 }
-export default ResponsiveAppBar;

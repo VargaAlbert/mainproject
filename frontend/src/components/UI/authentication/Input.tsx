@@ -3,14 +3,16 @@
 import React, { ChangeEvent, RefObject } from 'react';
 
 interface InputComponentProps {
+    onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+
     label: string;
     id: string;
+    value: string;
     type: string;
+
     name?: string;
     inputRef?: RefObject<HTMLInputElement>;
     autoComplete?: string;
-    onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-    value: string;
     required?: boolean;
 }
 
@@ -20,7 +22,7 @@ const Input: React.FC<InputComponentProps> = ({
     type,
     name,
     inputRef,
-    autoComplete = 'on',
+    autoComplete = 'off',
     onChange,
     value,
     required = false,
@@ -31,9 +33,7 @@ const Input: React.FC<InputComponentProps> = ({
                 className='block mb-2 text-sm font-medium text-white'
                 htmlFor={id}>{label}:</label>
             <input
-                /* className='border sm:text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-pink-600 focus:border-pink-600' */
                 className='border sm:text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-pink-600 focus:border-pink-600 focus:outline-none'
-
                 type={type}
                 id={id}
                 name={name}

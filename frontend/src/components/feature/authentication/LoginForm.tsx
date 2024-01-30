@@ -1,26 +1,29 @@
 "use client"
+
 import { useRef, useState, useEffect } from 'react';
-const LOGIN_URL = '/auth';
 import { useShopContext } from "@/services/providers/ShopContext";
+import { initLoginObj } from '@/services/initConfig';
+import axios from '@/services/api/axiosConfig';
+
 import Link from 'next/link'
 import Input from '@/components/UI/authentication/Input';
-import axios from '@/services/api/axiosConfig';
-import { initLoginObj } from '@/services/initConfig';
+import Button from '@/components/UI/authentication/Button';
+
+const LOGIN_URL = '/auth';
 
 export default function LoginForm() {
-
-    const { setAuth } = useShopContext();
 
     const [loginObj, setLoginObj] = useState<loginObjT>(initLoginObj);
 
     const userRef = useRef<HTMLInputElement | null>(null);
     const errRef = useRef<HTMLParagraphElement | null>(null);
 
+    const { setAuth } = useShopContext();
+
+
     useEffect(() => {
         const currentElement = userRef.current;
-        // Ellenőrizzük, hogy currentElement nem null és típusa HTMLElement
         if (currentElement instanceof HTMLParagraphElement) {
-            // Biztosítjuk, hogy a `focus` metódus a HTMLElement típuson elérhető.
             currentElement.focus();
         }
     }, [])
@@ -54,7 +57,6 @@ export default function LoginForm() {
                     withCredentials: true
                 }
             );
-            //console.log(JSON.stringify(response?.data));
             console.log(JSON.stringify(response));
             const accessToken = response?.data?.accessToken;
             const roles = response?.data?.roles;
@@ -94,9 +96,7 @@ export default function LoginForm() {
                 });
             }
             const currentElement = userRef.current;
-            // Ellenőrizzük, hogy currentElement nem null és típusa HTMLElement
             if (currentElement instanceof HTMLParagraphElement) {
-                // Biztosítjuk, hogy a `focus` metódus a HTMLElement típuson elérhető.
                 currentElement.focus();
             }
         }
@@ -133,7 +133,7 @@ export default function LoginForm() {
                             type='text'
                             name='user'
                             inputRef={userRef}
-                            autoComplete="off"
+                            //autoComplete="off"
                             onChange={handleLoginChange}
                             value={loginObj.user}
                             required
@@ -165,14 +165,13 @@ export default function LoginForm() {
                             <a href="#" className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Forgot password?</a>
                         </div>
 
-                        <button
-                            type="submit"
-                            className="w-full text-white focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-primary-600 hover:bg-primary-700 focus:ring-primary-800">Sign In</button>
+                        <Button
+                            label='Sign In'
+                        />
                     </form>
                     <p>
                         Need an Account?<br />
                         <span className="line">
-                            {/*put router link here*/}
                             <a href="#">Sign Up</a>
                         </span>
                     </p>

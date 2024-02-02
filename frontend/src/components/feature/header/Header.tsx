@@ -12,6 +12,7 @@ import {
     MenuItem,
     Container,
 } from '@mui/material/';
+import Link from 'next/link';
 import MenuIcon from '@mui/icons-material/Menu';
 import Image from 'next/image';
 import logo from '@/assets/logo.png'
@@ -35,17 +36,19 @@ export default function ResponsiveAppBar() {
         <AppBar position="static">
             <Container maxWidth="xl">
                 <Toolbar sx={{ display: { xs: 'flex' }, justifyContent: 'space-between' }} disableGutters>
-                    <Box sx={{
-                        maxWidth: '150px',
-                        display: { xs: 'none', md: 'flex' }, mr: 1
-                    }} >
-                        <Image
-                            src={logo}
-                            alt="Description of the image"
-                            className="w-full h-auto"
-                            priority
-                        />
-                    </Box>
+                    <Link href={'/'}>
+                        <Box sx={{
+                            maxWidth: '150px',
+                            display: { xs: 'none', md: 'flex' }, mr: 1
+                        }} >
+                            <Image
+                                src={logo}
+                                alt="Description of the image"
+                                className="w-full h-auto"
+                                priority
+                            />
+                        </Box>
+                    </Link>
                     <Box sx={
                         {
                             maxWidth: '48px',

@@ -1,4 +1,5 @@
 "use client"
+
 import * as React from 'react';
 import { Box, Modal } from '@mui/material/';
 import { useShopContext } from '@/services/providers/ShopContext';

@@ -12,6 +12,6 @@ type loginObjT = {
 type authT = {
     user: string;
     pwd: string;
-    roles: number;
+    roles: number[];
     accessToken: string;
 }

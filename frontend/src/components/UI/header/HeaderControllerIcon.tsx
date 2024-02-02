@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useShopContext } from '@/services/providers/ShopContext';
+import Link from 'next/link';
 import {
     Tooltip,
     Box,
@@ -20,13 +21,13 @@ import {
 
 
 const settings = ['Profile', 'Rendeléseim', 'Kijelentkezés'];
-const login = true
+const login = false
 
 export default function HeaderControllerIcon() {
 
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
-    const { handleChangeUIObj } = useShopContext();
+    const { handleChangeUIObj, auth } = useShopContext();
 
     const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElUser(event.currentTarget);
@@ -35,13 +36,18 @@ export default function HeaderControllerIcon() {
         setAnchorElUser(null);
     };
     const handleCloseUserMenuu = () => {
-        console.log("lefutottam");
         handleChangeUIObj('loginModal', true)
     }
 
+
+    /*    if (auth.roles === 2130 || auth.roles === 8505) {
+           settings.push("Editor page");
+       } */
+
+    console.log(auth.roles)
     return (
         <Box sx={{ display: 'flex', gap: '1rem', flexGrow: 0 }}>
-            {login ? (
+            {auth?.roles.length > 0 ? (
                 <Box >
                     <Tooltip title="Open settings">
                         <IconButton onClick={handleOpenUserMenu} color="inherit" sx={{ p: 0 }}>
@@ -68,7 +74,9 @@ export default function HeaderControllerIcon() {
                     >
                         {settings.map((setting) => (
                             <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                <Typography textAlign="center">{setting}</Typography>
+                                <Link href={`/adminpage`}>
+                                    <Typography textAlign="center">{setting}</Typography>
+                                </Link>
                             </MenuItem>
                         ))}
                     </Menu>

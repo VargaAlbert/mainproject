@@ -8,6 +8,7 @@ import axios from '@/services/api/axiosConfig';
 import Link from 'next/link'
 import Input from '@/components/UI/authentication/Input';
 import Button from '@/components/UI/authentication/Button';
+import LinkButton from '@/components/UI/LinkButton';
 
 const LOGIN_URL = '/auth';
 
@@ -42,7 +43,6 @@ export default function LoginForm() {
         });
     }
 
-    console.log(loginObj)
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
@@ -169,6 +169,10 @@ export default function LoginForm() {
                             label='Sign In'
                         />
                     </form>
+                    <LinkButton
+                        label='Registráció'
+                        href='/registration'
+                    />
                     <p>
                         Need an Account?<br />
                         <span className="line">

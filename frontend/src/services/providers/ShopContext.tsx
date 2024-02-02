@@ -23,9 +23,11 @@ interface ShopContextProps {
     setAuth: React.Dispatch<React.SetStateAction<authT>>;
     handleChangeUIObj: (key: string, value: boolean) => void;
     uiObj: uiObjT;
+    auth: authT;
 };
 
 const ShopContext = createContext({} as ShopContextProps)
+
 
 export const useShopContext = () => {
     return useContext(ShopContext);
@@ -51,9 +53,10 @@ export const ShopProvider: React.FC<ShopProviderProps> = ({
         handleChangeUIObj,
         uiObj,
         setAuth,
+        auth,
     };
 
-    console.log(uiObj)
+    console.log(auth)
     return (
         <ShopContext.Provider value={contextValue}>
             {children}

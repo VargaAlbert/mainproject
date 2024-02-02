@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Header from "@/components/feature/header/Header";
 import "./globals.css";
 import { ShopProvider } from "@/services/providers/ShopContext";
-
+import LoginModal from "@/components/feature/authentication/LoginModal";
 import { darkTheme } from "@/services/providers/MaterialTheme";
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -28,6 +28,7 @@ export default function RootLayout({
         <ThemeProvider theme={darkTheme}>
           <ShopProvider>
             <Header />
+            <LoginModal />
             {children}
           </ShopProvider>
         </ThemeProvider>

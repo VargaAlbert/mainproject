@@ -106,12 +106,9 @@ export default function LoginForm() {
     return (
         <>
             {loginObj.success ? (
-                <section>
-                    <h1>You are logged in!</h1>
-                    <br />
-                    <p>
-                        <Link href="/">Go to Home</Link>
-                    </p>
+                <section className='text-center'>
+                    <h1 className='pb-5 text-3xl'>Sikeres Bejelentkezés!</h1>
+                    <h3>Jó vásárlást kivánunk.</h3>
                 </section>
             ) : (
                 <section>

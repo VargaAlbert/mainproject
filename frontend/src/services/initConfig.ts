@@ -12,6 +12,6 @@ export const initLoginObj: loginObjT = {
 export const initAuth: authT = {
     user: '',
     pwd: '',
-    roles: 0,
+    roles: [],
     accessToken: '',
 }

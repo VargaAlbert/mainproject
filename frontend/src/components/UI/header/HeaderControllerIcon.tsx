@@ -2,14 +2,12 @@
 
 import { useState } from 'react';
 import { useShopContext } from '@/services/providers/ShopContext';
-import Link from 'next/link';
+
 import {
     Tooltip,
     Box,
     IconButton,
-    Typography,
     Menu,
-    MenuItem,
 } from '@mui/material/';
 
 import {
@@ -19,32 +17,29 @@ import {
     Favorite
 } from '@mui/icons-material/';
 
-
-const settings = ['Profile', 'Rendeléseim', 'Kijelentkezés'];
-const login = false
+import ControllerMenuItem from './ControllerMenuItem';
 
 export default function HeaderControllerIcon() {
 
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
-    const { handleChangeUIObj, auth } = useShopContext();
+    const {
+        handleChangeUIObj,
+        auth,
+    } = useShopContext();
 
     const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElUser(event.currentTarget);
     };
+
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
+
     const handleCloseUserMenuu = () => {
         handleChangeUIObj('loginModal', true)
     }
 
-
-    /*    if (auth.roles === 2130 || auth.roles === 8505) {
-           settings.push("Editor page");
-       } */
-
-    console.log(auth.roles)
     return (
         <Box sx={{ display: 'flex', gap: '1rem', flexGrow: 0 }}>
             {auth?.roles.length > 0 ? (
@@ -72,13 +67,9 @@ export default function HeaderControllerIcon() {
                         open={Boolean(anchorElUser)}
                         onClose={handleCloseUserMenu}
                     >
-                        {settings.map((setting) => (
-                            <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                <Link href={`/adminpage`}>
-                                    <Typography textAlign="center">{setting}</Typography>
-                                </Link>
-                            </MenuItem>
-                        ))}
+                        <ControllerMenuItem
+                            handleCloseUserMenu={handleCloseUserMenu}
+                        />
                     </Menu>
                 </Box>
             ) : (

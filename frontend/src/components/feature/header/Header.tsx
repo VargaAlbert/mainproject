@@ -36,19 +36,19 @@ export default function ResponsiveAppBar() {
         <AppBar position="static">
             <Container maxWidth="xl">
                 <Toolbar sx={{ display: { xs: 'flex' }, justifyContent: 'space-between' }} disableGutters>
-                    <Link href={'/'}>
-                        <Box sx={{
-                            maxWidth: '150px',
-                            display: { xs: 'none', md: 'flex' }, mr: 1
-                        }} >
+                    <Box sx={{
+                        maxWidth: '150px',
+                        display: { xs: 'none', md: 'flex' }, mr: 1
+                    }} >
+                        <Link href={'/'}>
                             <Image
                                 src={logo}
                                 alt="Description of the image"
                                 className="w-full h-auto"
                                 priority
                             />
-                        </Box>
-                    </Link>
+                        </Link>
+                    </Box>
                     <Box sx={
                         {
                             maxWidth: '48px',
@@ -98,12 +98,14 @@ export default function ResponsiveAppBar() {
                             flexGrow: 1, md: 'none'
                         }, mr: 1
                     }}>
-                        <Image
-                            src={logo}
-                            alt="logo"
-                            className="w-full h-auto"
-                            priority
-                        />
+                        <Link href={'/'}>
+                            <Image
+                                src={logo}
+                                alt="logo"
+                                className="w-full h-auto"
+                                priority
+                            />
+                        </Link>
                     </Box>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'center' }}>
                         {pages.map((page) => (

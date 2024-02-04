@@ -5,7 +5,7 @@ import { ShopProvider } from "@/services/providers/ShopContext";
 import LoginModal from "@/components/feature/authentication/LoginModal";
 import { darkTheme } from "@/services/providers/MaterialTheme";
 import { ThemeProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
+import PersistLogin from "@/components/feature/authentication/PersitstLogin";
 
 
 export const metadata: Metadata = {
@@ -27,9 +27,11 @@ export default function RootLayout({
         suppressHydrationWarning={true}>
         <ThemeProvider theme={darkTheme}>
           <ShopProvider>
-            <Header />
-            <LoginModal />
-            {children}
+            <PersistLogin>
+              <Header />
+              <LoginModal />
+              {children}
+            </PersistLogin>
           </ShopProvider>
         </ThemeProvider>
       </body>

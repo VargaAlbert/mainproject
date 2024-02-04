@@ -2,16 +2,12 @@
 
 import { useRef, useState, useEffect } from 'react';
 import { useShopContext } from "@/services/providers/ShopContext";
-import { initLoginObj } from '@/services/initConfig';
+import { useRouter } from 'next/navigation';
 import axios from '@/services/api/axiosConfig';
 
-import useLocalStorage from '@/hooks/useLocalStorage';
 import useInput from '@/hooks/useInput';
 import useToggle from '@/hooks/useToggle';
 
-import { useRouter } from 'next/navigation';
-
-import Input from '@/components/UI/authentication/Input';
 import Button from '@/components/UI/authentication/Button';
 import LinkButton from '@/components/UI/LinkButton';
 
@@ -20,12 +16,10 @@ const LOGIN_URL = '/auth';
 
 export default function LoginForm() {
 
-    const [success, setSuccess] = useState<boolean>(false);
-
     const userRef = useRef<HTMLInputElement | null>(null);
     const errRef = useRef<HTMLParagraphElement | null>(null);
 
-    const { setAuth, handleChangeUIObj } = useShopContext();
+    const { auth, setAuth, handleChangeUIObj } = useShopContext();
 
     const router = useRouter();
 
@@ -58,10 +52,15 @@ export default function LoginForm() {
             );
             const accessToken = response?.data?.accessToken;
             const roles = response?.data?.roles;
-            setAuth({ user, pwd, roles, accessToken });
+            setAuth({
+                user,
+                roles,
+                accessToken,
+                isLogin: true
+            });
             resetUser();
             setPwd('');
-            setSuccess(true);
+            //setSuccess(true);
             router.replace("/");
 
         } catch (err: any) {
@@ -87,7 +86,7 @@ export default function LoginForm() {
 
     return (
         <>
-            {success ? (
+            {auth.isLogin ? (
                 <section className='text-center'>
                     <h1 className='pb-5 text-3xl'>Sikeres Bejelentkezés!</h1>
                     <h3>Jó vásárlást kivánunk.</h3>

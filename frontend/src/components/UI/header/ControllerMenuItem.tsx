@@ -34,39 +34,33 @@ export default function ControllerMenuItem({ handleCloseUserMenu }: ControllerMe
       <MenuItem onClick={handleCloseUserMenu}>
         <Typography textAlign="center">Rendeléseim</Typography>
       </MenuItem>
-      {(() => {
-        switch (auth.roles[1]) {
-          case 8505:
-            return (
-              <>
-                <MenuItem onClick={handleCloseUserMenu}>
-                  <Link href="/adminpage">
-                    <Typography textAlign="center">Editor Page</Typography>
-                  </Link>
-                </MenuItem>
-                <MenuItem onClick={handleCloseUserMenu}>
-                  <Link href="/adminpage">
-                    <Typography textAlign="center">Admin Page</Typography>
-                  </Link>
-                </MenuItem>
-              </>
-            );
-          case 3540:
-            return (
-              <MenuItem onClick={handleCloseUserMenu}>
-                <Link href="/adminpage">
-                  <Typography textAlign="center">Editor Page</Typography>
-                </Link>
-              </MenuItem>
-            );
-          default:
-            return null;
-        }
-      })()}
+
+      {auth.roles.includes(8505) && (
+        <>
+          <MenuItem onClick={handleCloseUserMenu}>
+            <Link href="/adminpage">
+              <Typography textAlign="center">Editor Page</Typography>
+            </Link>
+          </MenuItem>
+          <MenuItem onClick={handleCloseUserMenu}>
+            <Link href="/adminpage">
+              <Typography textAlign="center">Admin Page</Typography>
+            </Link>
+          </MenuItem>
+        </>
+      )}
+
+      {auth.roles.includes(3540) && (
+        <MenuItem onClick={handleCloseUserMenu}>
+          <Link href="/adminpage">
+            <Typography textAlign="center">Editor Page</Typography>
+          </Link>
+        </MenuItem>
+      )}
+
       <MenuItem onClick={handleCloseUserMenu}>
         <Typography onClick={signOut} textAlign="center">Kijelentkezés</Typography>
       </MenuItem>
     </>
-
-  )
-}
+  );
+}  

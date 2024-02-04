@@ -42,7 +42,7 @@ export default function HeaderControllerIcon() {
 
     return (
         <Box sx={{ display: 'flex', gap: '1rem', flexGrow: 0 }}>
-            {auth?.roles.length > 0 ? (
+            {auth.isLogin ? (
                 <Box >
                     <Tooltip title="Open settings">
                         <IconButton onClick={handleOpenUserMenu} color="inherit" sx={{ p: 0 }}>

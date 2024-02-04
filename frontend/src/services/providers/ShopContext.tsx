@@ -41,6 +41,7 @@ export const ShopProvider: React.FC<ShopProviderProps> = ({
 
     const [uiObj, setUiObj] = useState<uiObjT>(initUiObj)
     const [persist, setPersist] = useLocalStorage<boolean>("persist", false);
+    const [auth, setAuth] = useState<authT>(initAuth);
 
     const handleChangeUIObj = (key: string, value: boolean): void => {
         setUiObj({
@@ -49,7 +50,6 @@ export const ShopProvider: React.FC<ShopProviderProps> = ({
         });
     }
 
-    const [auth, setAuth] = useState<authT>(initAuth);
 
     const contextValue: ShopContextProps = {
         handleChangeUIObj,
@@ -60,7 +60,7 @@ export const ShopProvider: React.FC<ShopProviderProps> = ({
         setPersist,
     };
 
-    console.log(auth)
+    console.log('context log', auth)
     return (
         <ShopContext.Provider value={contextValue}>
             {children}

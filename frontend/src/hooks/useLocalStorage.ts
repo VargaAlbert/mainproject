@@ -1,22 +1,29 @@
-import { useEffect, useState } from "react"
+import { useState, useEffect, Dispatch, SetStateAction } from "react";
 
-const useLocalStorage = <T>(key: string, initialValue: T | (() => T)) =>{
-  const [value, setValue] = useState<T>(() => {
-    const jsonValue = localStorage.getItem(key)
-    if (jsonValue != null) return JSON.parse(jsonValue)
+const getLocalValue = <T>(key: string, initValue: T | (() => T)): T => {
+    // SSR Next.js 
+    if (typeof window === 'undefined') return initValue instanceof Function ? initValue() : initValue;
 
-    if (typeof initialValue === "function") {
-      return (initialValue as () => T)()
-    } else {
-      return initialValue
-    }
-  })
+    // if a value is already stored 
+    const localValue = JSON.parse(localStorage.getItem(key) || 'null') as T;
+    if (localValue) return localValue;
 
-  useEffect(() => {
-    localStorage.setItem(key, JSON.stringify(value))
-  }, [key, value])
+    // return result of a function 
+    if (initValue instanceof Function) return initValue();
 
-  return [value, setValue] as [typeof value, typeof setValue]
-}
+    return initValue;
+};
 
-export default useLocalStorage
+const useLocalStorage = <T>(key: string, initValue: T | (() => T)) => {
+    const [value, setValue] = useState<T>(() => {
+        return getLocalValue(key, initValue);
+    });
+
+    useEffect(() => {
+        localStorage.setItem(key, JSON.stringify(value));
+    }, [key, value]);
+
+    return [value, setValue] as [T, Dispatch<SetStateAction<T>>];
+};
+
+export default useLocalStorage;

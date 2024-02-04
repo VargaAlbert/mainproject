@@ -1,6 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
 
-
 const BASE_URL: string = 'http://localhost:5005';
 
 export default axios.create({

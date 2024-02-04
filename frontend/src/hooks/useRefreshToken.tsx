@@ -1,7 +1,5 @@
-"use client"
 import axios from '@/services/api/axiosConfig';
 import { useShopContext } from '@/services/providers/ShopContext';
-import useAuth from './useAuth';
 
 const useRefreshToken = () => {
     const { setAuth } = useShopContext();

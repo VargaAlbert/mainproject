@@ -1,4 +1,3 @@
-"use client"
 import { axiosPrivate } from '@/services/api/axiosConfig';
 import { useEffect } from "react";
 import useRefreshToken from "./useRefreshToken";

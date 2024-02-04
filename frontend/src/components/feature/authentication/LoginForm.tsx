@@ -20,7 +20,7 @@ const LOGIN_URL = '/auth';
 
 export default function LoginForm() {
 
-    const [loginObj, setLoginObj] = useState<loginObjT>(initLoginObj);
+    const [success, setSuccess] = useState<boolean>(false);
 
     const userRef = useRef<HTMLInputElement | null>(null);
     const errRef = useRef<HTMLParagraphElement | null>(null);
@@ -61,6 +61,7 @@ export default function LoginForm() {
             setAuth({ user, pwd, roles, accessToken });
             resetUser();
             setPwd('');
+            setSuccess(true);
             router.replace("/");
 
         } catch (err: any) {
@@ -81,12 +82,12 @@ export default function LoginForm() {
     }
 
     const handleCloseUserMenu = () => {
-        handleChangeUIObj('loginModal', false)
+        handleChangeUIObj('loginModal', false);
     }
 
     return (
         <>
-            {loginObj.success ? (
+            {success ? (
                 <section className='text-center'>
                     <h1 className='pb-5 text-3xl'>Sikeres Bejelentkezés!</h1>
                     <h3>Jó vásárlást kivánunk.</h3>

@@ -1,4 +1,4 @@
-import { useState, Dispatch, SetStateAction, ChangeEvent } from 'react';
+import { ChangeEvent } from 'react';
 import useLocalStorage from './useLocalStorage';
 
 type UseToggleResult = [boolean, (event?: ChangeEvent<HTMLInputElement> | boolean) => void];

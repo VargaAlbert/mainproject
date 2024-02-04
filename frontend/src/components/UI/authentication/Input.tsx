@@ -4,12 +4,10 @@ import React, { ChangeEvent, RefObject } from 'react';
 
 interface InputComponentProps {
     onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-
     label: string;
     id: string;
     value: string;
     type: string;
-
     name?: string;
     inputRef?: RefObject<HTMLInputElement>;
     autoComplete?: string;

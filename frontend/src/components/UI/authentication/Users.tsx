@@ -3,22 +3,10 @@
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import useAxiosPrivate from '@/hooks/useAxiosPrivate';
-import Link from 'next/link';
-import useRefreshToken from '@/hooks/useRefreshToken';
 
-/* interface User {
-    refreshToken: string[];
-    username?: string | null | undefined;
-    roles?: {
-        User: number;
-        Editor?: number | null | undefined;
-        Admin?: number | null | undefined;
-    } | null | undefined;
-    password?: string | undefined;
-} */
 
 export default function Users() {
-    const [users, setUsers] = useState<any>({});
+    const [users, setUsers] = useState<userT[]>([]);
     const axiosPrivate = useAxiosPrivate();
     const router = useRouter();
     const effectRun = useRef(false);
@@ -57,7 +45,7 @@ export default function Users() {
             {users?.length
                 ? (
                     <ul>
-                        {users.map((user: any, i: any) => <li key={i}>{user?.username}</li>)}
+                        {users.map((user, i) => <li key={i}>{user?.username}</li>)}
                     </ul>
                 ) : <p>No users to display</p>
             }

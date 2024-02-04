@@ -4,8 +4,10 @@ import { useRef, useState, useEffect } from 'react';
 import { useShopContext } from "@/services/providers/ShopContext";
 import { initLoginObj } from '@/services/initConfig';
 import axios from '@/services/api/axiosConfig';
+import useLocalStorage from '@/hooks/useLocalStorage';
 
-import Link from 'next/link'
+import { useRouter } from 'next/navigation';
+
 import Input from '@/components/UI/authentication/Input';
 import Button from '@/components/UI/authentication/Button';
 import LinkButton from '@/components/UI/LinkButton';
@@ -18,9 +20,13 @@ export default function LoginForm() {
 
     const userRef = useRef<HTMLInputElement | null>(null);
     const errRef = useRef<HTMLParagraphElement | null>(null);
+    const {
+        setAuth,
+        persist,
+        setPersist
+    } = useShopContext();
 
-    const { setAuth } = useShopContext();
-
+    const router = useRouter();
 
     useEffect(() => {
         const currentElement = userRef.current;
@@ -41,6 +47,10 @@ export default function LoginForm() {
             ...loginObj,
             [e.target.name]: e.target.value
         });
+    }
+
+    const togglePersist = () => {
+        setPersist(prev => !prev);
     }
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -72,6 +82,7 @@ export default function LoginForm() {
                 'pwd': '',
                 'success': true,
             });
+            router.replace("/");
         } catch (err: any) {
             if (!err?.response) {
                 setLoginObj({
@@ -150,6 +161,8 @@ export default function LoginForm() {
                                 <div className="flex items-center h-5">
                                     <input
                                         id="remember"
+                                        onChange={togglePersist}
+                                        checked={persist}
                                         aria-describedby="remember"
                                         type="checkbox"
                                         className="w-4 h-4 border rounded focus:ring-1 bg-gray-700 border-gray-600 focus:ring-primary-600 ring-offset-primary-800"

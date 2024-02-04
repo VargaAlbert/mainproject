@@ -8,7 +8,7 @@ import {
   Typography,
   MenuItem,
 } from '@mui/material/';
-import { initAuth } from '@/services/initConfig';
+import useLogout from '@/hooks/useLogouth';
 
 interface ControllerMenuItemPropT {
   handleCloseUserMenu: () => void
@@ -16,13 +16,13 @@ interface ControllerMenuItemPropT {
 
 export default function ControllerMenuItem({ handleCloseUserMenu }: ControllerMenuItemPropT) {
 
-  const { auth, setAuth } = useShopContext();
-  const router = useRouter();
+  const { auth } = useShopContext()
 
-  const logout = async () => {
-    // if used in more components, this should be in context 
-    // axios to /logout endpoint 
-    setAuth(initAuth);
+  const router = useRouter();
+  const logout = useLogout();
+
+  const signOut = async () => {
+    await logout();
     router.push('/', undefined);
   }
 
@@ -64,7 +64,7 @@ export default function ControllerMenuItem({ handleCloseUserMenu }: ControllerMe
         }
       })()}
       <MenuItem onClick={handleCloseUserMenu}>
-        <Typography onClick={logout} textAlign="center">Kijelentkezés</Typography>
+        <Typography onClick={signOut} textAlign="center">Kijelentkezés</Typography>
       </MenuItem>
     </>
 

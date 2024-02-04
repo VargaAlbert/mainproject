@@ -20,11 +20,6 @@ type ResponseType = {
     data: any;
 }
 
-type registrationT = {
-    user: string
-
-}
-
 export default function RegistrationForm() {
     const userRef = useRef<HTMLInputElement | null>(null);
     const errRef = useRef<HTMLParagraphElement | null>(null);

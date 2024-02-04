@@ -8,6 +8,7 @@ import React, {
     ReactNode,
     ChangeEvent,
 } from "react";
+import useLocalStorage from "@/hooks/useLocalStorage";
 
 import {
     initUiObj,
@@ -20,14 +21,15 @@ type ShopProviderProps = {
 
 
 interface ShopContextProps {
+    setPersist: React.Dispatch<React.SetStateAction<boolean>>;
     setAuth: React.Dispatch<React.SetStateAction<authT>>;
     handleChangeUIObj: (key: string, value: boolean) => void;
     uiObj: uiObjT;
     auth: authT;
+    persist: boolean;
 };
 
 const ShopContext = createContext({} as ShopContextProps)
-
 
 export const useShopContext = () => {
     return useContext(ShopContext);
@@ -38,7 +40,7 @@ export const ShopProvider: React.FC<ShopProviderProps> = ({
 }) => {
 
     const [uiObj, setUiObj] = useState<uiObjT>(initUiObj)
-
+    const [persist, setPersist] = useLocalStorage<boolean>("persist", false);
 
     const handleChangeUIObj = (key: string, value: boolean): void => {
         setUiObj({
@@ -54,6 +56,8 @@ export const ShopProvider: React.FC<ShopProviderProps> = ({
         uiObj,
         setAuth,
         auth,
+        persist,
+        setPersist,
     };
 
     console.log(auth)

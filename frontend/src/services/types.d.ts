@@ -6,7 +6,6 @@ type authT = {
     user: string;
     roles: number[];
     accessToken: string;
-    isLogin: boolean;
 }
 
 type userT = {

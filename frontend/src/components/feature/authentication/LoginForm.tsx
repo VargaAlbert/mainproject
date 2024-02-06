@@ -56,11 +56,9 @@ export default function LoginForm() {
                 user,
                 roles,
                 accessToken,
-                isLogin: true
             });
             resetUser();
             setPwd('');
-            //setSuccess(true);
             router.replace("/");
 
         } catch (err: any) {
@@ -86,7 +84,7 @@ export default function LoginForm() {
 
     return (
         <>
-            {auth.isLogin ? (
+            {auth?.accessToken ? (
                 <section className='text-center'>
                     <h1 className='pb-5 text-3xl'>Sikeres Bejelentkezés!</h1>
                     <h3>Jó vásárlást kivánunk.</h3>

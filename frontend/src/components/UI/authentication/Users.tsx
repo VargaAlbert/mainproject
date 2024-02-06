@@ -22,11 +22,6 @@ export default function Users() {
 
     const handleLogouth = () => {
         handleChangeUIObj('loginModal', true);
-        setAuth({
-            ...auth,
-            isLogin: false
-        });
-
     }
 
     console.log("111188544", auth)

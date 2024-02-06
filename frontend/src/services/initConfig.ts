@@ -6,5 +6,4 @@ export const initAuth: authT = {
     user: '',
     roles: [],
     accessToken: '',
-    isLogin: false,
 }

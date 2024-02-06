@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation';
 import useRefreshToken from '@/hooks/useRefreshToken';
 import { useShopContext } from '@/services/providers/ShopContext';
 
+import { LinearProgress } from '@mui/material';
+
 interface PersistLoginProps {
     children: React.ReactNode;
 }
@@ -16,7 +18,7 @@ const PersistLogin: React.FC<PersistLoginProps> = ({ children }) => {
     const effectRun = useRef(false);
 
     const router = useRouter();
-
+    console.log(auth)
     useEffect(() => {
         const currentPath = window.location.pathname;
         console.log("aktuális ut", currentPath)
@@ -47,7 +49,22 @@ const PersistLogin: React.FC<PersistLoginProps> = ({ children }) => {
         console.log(`aT: ${JSON.stringify(auth?.accessToken)}`)
     }, [isLoading])
 
-    return <>{children}</>;
+    if (!auth?.accessToken) {
+        return (
+            <>{children}</>
+        );
+    }
+
+    /*     return (
+            <>
+                {!isLoading ? <>{children}</> :
+                    <div className="flex items-center justify-center h-screen">
+                        <LinearProgress className="w-1/2" color="inherit" />
+                    </div>
+    
+                }
+            </>
+        ) */
 };
 
 export default PersistLogin;

@@ -1,15 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import axios from '@/services/api/axiosConfig';
 
-type productT = {
-  id: string;
-  product: string;
-  description: string;
-  img: string;
-  price: number;
-  category: string;
-}
-
 const useFetchData = () => {
   const [data, setData] = useState<productT[]>([]);
   const [loading, setLoading] = useState<boolean>(true);

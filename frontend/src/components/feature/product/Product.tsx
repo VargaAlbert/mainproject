@@ -2,13 +2,21 @@
 
 import React from 'react'
 import useFetchData from "@/hooks/useFetchProducts";
+import useProductsFilter from '@/hooks/useProductsFilter';
+import { notFound } from 'next/navigation'
 
 type propT = {
     category?: string
 }
 
 export default function Product({ category }: propT) {
+
     const { data, loading, error } = useFetchData();
+
+    const products = useProductsFilter(data, { category: category })
+    console.warn(products)
+
+
 
     if (loading) {
         return <div>Loading...</div>;
@@ -18,17 +26,16 @@ export default function Product({ category }: propT) {
         return <div>Error: {error}</div>;
     }
 
-    console.warn(category)
+    if (products.length === 0) {
+        notFound()
+    }
 
     return (
         <div>
             <h1>Data:</h1>
             <ul>
-                {category ?
-                    data.filter((item) => item.category === category).map((item, index) => (
-                        <li key={index}>{item.product}</li>
-                    )) :
-                    data.map((item, index) => (
+                {
+                    products.map((item, index) => (
                         <li key={index}>{item.product}</li>
                     ))
                 }

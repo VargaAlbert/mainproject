@@ -18,3 +18,16 @@ type userT = {
     };
     password: string;
 }
+
+type productT = {
+    id: string;
+    product: string;
+    description: string;
+    img: string;
+    price: number;
+    category: string;
+}
+
+type filterT = {
+    category?: string
+}

@@ -55,16 +55,16 @@ const PersistLogin: React.FC<PersistLoginProps> = ({ children }) => {
         );
     }
 
-    /*     return (
-            <>
-                {!isLoading ? <>{children}</> :
-                    <div className="flex items-center justify-center h-screen">
-                        <LinearProgress className="w-1/2" color="inherit" />
-                    </div>
-    
-                }
-            </>
-        ) */
+    return (
+        <>
+            {!isLoading ? <>{children}</> :
+                <div className="flex items-center justify-center h-screen">
+                    <LinearProgress className="w-1/2" color="inherit" />
+                </div>
+
+            }
+        </>
+    )
 };
 
 export default PersistLogin;

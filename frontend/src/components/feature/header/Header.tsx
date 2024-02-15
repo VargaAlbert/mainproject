@@ -18,13 +18,12 @@ import Image from 'next/image';
 import logo from '@/assets/logo.png'
 
 import HeaderControllerIcon from '@/components/UI/header/HeaderControllerIcon';
-import { PRODUCT_CATEGORY, processString } from '@/utils/category';
+import { ALL_PRODUCTS, PRODUCT_CATEGORY, processString } from '@/utils/category';
 
 
 export default function ResponsiveAppBar() {
 
     const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
-    const [counter, setCounter] = useState<number>(0)
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
@@ -34,11 +33,10 @@ export default function ResponsiveAppBar() {
         setAnchorElNav(null);
     };
 
-    console.log("ezkelllllllllllllllll", counter)
 
     return (
         <AppBar position="static">
-            <Container maxWidth="xl">
+            <Container className="container mx-auto max-w-screen-2xl">
                 <Toolbar sx={{ display: { xs: 'flex' }, justifyContent: 'space-between' }} disableGutters>
                     <Box sx={{
                         maxWidth: '150px',
@@ -87,6 +85,14 @@ export default function ResponsiveAppBar() {
                                 display: { xs: 'block', md: 'none' },
                             }}
                         >
+                            <MenuItem onClick={handleCloseNavMenu}>
+                                <Typography textAlign="center">
+                                    <Link href='/products'>
+                                        {ALL_PRODUCTS}
+                                    </Link>
+                                </Typography>
+                            </MenuItem>
+
                             {PRODUCT_CATEGORY.map((page) => (
                                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                                     <Typography textAlign="center">
@@ -116,10 +122,18 @@ export default function ResponsiveAppBar() {
                         </Link>
                     </Box>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'center' }}>
+                        <Link
+                            href='/products'
+                            className="my-2 text-white block"
+                            onClick={handleCloseNavMenu}
+                        >
+                            <Button>
+                                {ALL_PRODUCTS}
+                            </Button>
+                        </Link>
                         {PRODUCT_CATEGORY.map((page) => (
                             <Link
                                 href={processString(`/products/${page}`)}
-                                /* onClick={() => { setCounter((prev) => prev + 1) }} */
                                 className="my-2 text-white block"
                                 key={page}
                                 onClick={handleCloseNavMenu}

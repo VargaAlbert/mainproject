@@ -9,12 +9,8 @@ type paramsT = {
 
 export default function ProductsPage({ params }: paramsT) {
     return (
-        <div>
-
-
+        <section className="mx-auto max-w-screen-2xl">
             <Product category={params.category} />
-
-
-        </div>
+        </section>
     )
 }

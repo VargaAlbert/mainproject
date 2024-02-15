@@ -1,11 +1,12 @@
+export const ALL_PRODUCTS = "Összes termék";
+
 export const PRODUCT_CATEGORY = [
-    "Összes termék", 
     "Botok", 
     "Kiegészítők", 
     "Orsók", 
     "Táskák és Camping", 
     "Zsinórok"
-]
+];
 
 export const processString = (category: string): string => {
     return category
@@ -13,6 +14,6 @@ export const processString = (category: string): string => {
       .normalize('NFD')
       .replace(/[\u0300-\u036f]/g, '') // eltávolítja az ékezeteket
       .replace(/\s/g, ''); // eltávolítja a szóközöket
-  };
+};
   
 

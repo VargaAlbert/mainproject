@@ -3,7 +3,7 @@ import Product from '@/components/feature/product/Product'
 
 export default function ProductsPage() {
     return (
-        <section>
+        <section className="mx-auto max-w-screen-2xl">
             <Product />
         </section>
     )

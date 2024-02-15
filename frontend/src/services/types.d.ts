@@ -20,7 +20,7 @@ type userT = {
 }
 
 type productT = {
-    id: string;
+    productid: string;
     product: string;
     description: string;
     img: string;

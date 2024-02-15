@@ -1,7 +1,6 @@
 import React from 'react';
 
 type ButtonType = "submit" | "button" | "reset" | undefined;
-type disabledType = false | true | undefined;
 
 interface ButtonComponentProps {
     onClick?: () => void,

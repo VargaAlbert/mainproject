@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "albihorgászbolt e-commerce backend",
   "type": "module",
-  "main": "index.js",
+  "main": "server.mjs",
   "scripts": {
     "start": "node server.mjs",
     "dev": "nodemon server.mjs"
@@ -23,5 +23,8 @@
     "node": "^21.2.0",
     "react-scripts": "^5.0.1",
     "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
   }
 }

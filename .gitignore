@@ -36,3 +36,6 @@
 /frontend/next-env.d.ts
 
 ##!BACKEND!##
+
+/backend/node_modules
+/backend/.env

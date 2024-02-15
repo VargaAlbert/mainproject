@@ -18,11 +18,13 @@ import Image from 'next/image';
 import logo from '@/assets/logo.png'
 
 import HeaderControllerIcon from '@/components/UI/header/HeaderControllerIcon';
+import { PRODUCT_CATEGORY, processString } from '@/utils/category';
 
-const pages = ['Botok', 'Kiegészítők', 'Orsók', 'Zsinórok'];
 
 export default function ResponsiveAppBar() {
+
     const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+    const [counter, setCounter] = useState<number>(0)
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
@@ -31,6 +33,8 @@ export default function ResponsiveAppBar() {
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
     };
+
+    console.log("ezkelllllllllllllllll", counter)
 
     return (
         <AppBar position="static">
@@ -83,9 +87,13 @@ export default function ResponsiveAppBar() {
                                 display: { xs: 'block', md: 'none' },
                             }}
                         >
-                            {pages.map((page) => (
+                            {PRODUCT_CATEGORY.map((page) => (
                                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center">{page}</Typography>
+                                    <Typography textAlign="center">
+                                        <Link href={processString(`/products/${page}`)}>
+                                            {page}
+                                        </Link>
+                                    </Typography>
                                 </MenuItem>
                             ))}
                         </Menu>
@@ -108,14 +116,18 @@ export default function ResponsiveAppBar() {
                         </Link>
                     </Box>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'center' }}>
-                        {pages.map((page) => (
-                            <Button
+                        {PRODUCT_CATEGORY.map((page) => (
+                            <Link
+                                href={processString(`/products/${page}`)}
+                                /* onClick={() => { setCounter((prev) => prev + 1) }} */
+                                className="my-2 text-white block"
                                 key={page}
                                 onClick={handleCloseNavMenu}
-                                sx={{ my: 2, color: 'white', display: 'block' }}
                             >
-                                {page}
-                            </Button>
+                                <Button>
+                                    {page}
+                                </Button>
+                            </Link>
                         ))}
                     </Box>
                     <HeaderControllerIcon />

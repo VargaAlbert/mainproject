@@ -7,3 +7,7 @@ export const initAuth: authT = {
     roles: [],
     accessToken: '',
 }
+
+export const initFilter: filterT = {
+    category: undefined,
+}

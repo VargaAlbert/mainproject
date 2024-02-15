@@ -1,9 +1,8 @@
 "use client"
 
-import React from 'react'
-import useFetchData from "@/hooks/useFetchProducts";
-import useProductsFilter from '@/hooks/useProductsFilter';
+import React, { useEffect, useRef } from 'react'
 import { notFound } from 'next/navigation'
+import { useShopContext } from "@/services/providers/ShopContext";
 
 type propT = {
     category?: string
@@ -11,12 +10,23 @@ type propT = {
 
 export default function Product({ category }: propT) {
 
-    const { data, loading, error } = useFetchData();
+    const { filters, setFilters, products, loading, error } = useShopContext();
 
-    const products = useProductsFilter(data, { category: category })
-    console.warn(products)
+    useEffect(() => {
 
+        setFilters((prevFilters) => ({
+            ...prevFilters,
+            category: category
+        }));
 
+        if (products.length === 0) {
+            notFound()
+        }
+
+    }, [category, setFilters, products.length]);
+
+    console.log("11111", category)
+    console.log("4454", filters)
 
     if (loading) {
         return <div>Loading...</div>;
@@ -24,10 +34,6 @@ export default function Product({ category }: propT) {
 
     if (error) {
         return <div>Error: {error}</div>;
-    }
-
-    if (products.length === 0) {
-        notFound()
     }
 
     return (
@@ -43,5 +49,3 @@ export default function Product({ category }: propT) {
         </div>
     );
 };
-
-//.filter((item) => item.category === category).

@@ -1,0 +1,1 @@
+20240215	15:15:52	b280dc4c-d0d3-465a-a149-2f182ee4c2f0	GET	http://localhost:3000	/products

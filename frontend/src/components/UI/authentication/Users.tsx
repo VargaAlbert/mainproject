@@ -2,17 +2,14 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
+import { useShopContext } from '@/services/providers/ShopContext';
+
 import useAxiosPrivate from '@/hooks/useAxiosPrivate';
 import useRefreshToken from "@/hooks/useRefreshToken";
-import { useShopContext } from '@/services/providers/ShopContext';
 
 export default function Users() {
 
-    const {
-        handleChangeUIObj,
-        auth,
-        setAuth
-    } = useShopContext();
+    const { handleChangeUIObj } = useShopContext();
 
     const [users, setUsers] = useState<userT[]>([]);
     const axiosPrivate = useAxiosPrivate();
@@ -24,7 +21,6 @@ export default function Users() {
         handleChangeUIObj('loginModal', true);
     }
 
-    console.log("111188544", auth)
     useEffect(() => {
         const controller = new AbortController();
 
@@ -50,11 +46,6 @@ export default function Users() {
             effectRun.current = true;
         };
     }, []);
-
-    const handleRefresh = () => {
-        const refresh = useAxiosPrivate();
-        console.log(refresh)
-    }
 
     return (
         <article>

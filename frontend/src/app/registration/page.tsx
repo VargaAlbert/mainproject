@@ -1,5 +1,6 @@
 import React from 'react'
 import RegistrationForm from '@/components/feature/authentication/RegistrationForm'
+
 export default function page() {
     return (
         <section className='flex flex-col justify-start items-center h-screen'>

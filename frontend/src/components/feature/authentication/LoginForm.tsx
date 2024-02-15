@@ -3,7 +3,7 @@
 import { useRef, useState, useEffect } from 'react';
 import { useShopContext } from "@/services/providers/ShopContext";
 import { useRouter } from 'next/navigation';
-import axios from '@/services/api/axiosConfig';
+import axios, { LOGIN_URL } from '@/services/api/axiosConfig';
 
 import useInput from '@/hooks/useInput';
 import useToggle from '@/hooks/useToggle';
@@ -11,22 +11,19 @@ import useToggle from '@/hooks/useToggle';
 import Button from '@/components/UI/authentication/Button';
 import LinkButton from '@/components/UI/LinkButton';
 
-
-const LOGIN_URL = '/auth';
-
 export default function LoginForm() {
 
-    const userRef = useRef<HTMLInputElement | null>(null);
-    const errRef = useRef<HTMLParagraphElement | null>(null);
-
     const { auth, setAuth, handleChangeUIObj } = useShopContext();
-
-    const router = useRouter();
 
     const [user, resetUser, userAttribs] = useInput('user', '')
     const [pwd, setPwd] = useState('');
     const [errMsg, setErrMsg] = useState('');
     const [check, toggleCheck] = useToggle('persist', false);
+
+    const userRef = useRef<HTMLInputElement | null>(null);
+    const errRef = useRef<HTMLParagraphElement | null>(null);
+
+    const router = useRouter();
 
     useEffect(() => {
         const currentElement = userRef.current;
@@ -41,7 +38,6 @@ export default function LoginForm() {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
         try {
             const response = await axios.post(LOGIN_URL,
                 JSON.stringify({ user, pwd }),
@@ -98,13 +94,13 @@ export default function LoginForm() {
                     </p>
 
                     <h1 className="text-xl pb-7 font-bold leading-tight tracking-tight md:text-2xl text-white">
-                        Sign in to your account
+                        Jelentkezz be a fiókodba.
                     </h1>
                     <form
                         className="space-y-4 md:space-y-6"
                         onSubmit={handleSubmit}>
                         <div >
-                            <label className='inputLabel' htmlFor="username">Username:</label>
+                            <label className='inputLabel' htmlFor="username">Felhasználónév:</label>
                             <input
                                 className='imputClass'
                                 type="text"
@@ -116,7 +112,7 @@ export default function LoginForm() {
                             />
                         </div>
                         <div>
-                            <label className='inputLabel' htmlFor="password">Password:</label>
+                            <label className='inputLabel' htmlFor="password">Jelszó:</label>
                             <input
                                 className='imputClass'
                                 type="password"
@@ -139,7 +135,7 @@ export default function LoginForm() {
                                     />
                                 </div>
                                 <div className="ml-3 text-sm">
-                                    <label htmlFor="remember" className="text-gray-300">Remember me</label>
+                                    <label htmlFor="remember" className="text-gray-300">Maradjon belépve</label>
                                 </div>
                             </div>
                             <a href="#" className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Forgot password?</a>
@@ -155,9 +151,9 @@ export default function LoginForm() {
                         onClick={handleCloseUserMenu}
                     />
                     <p>
-                        Need an Account?<br />
+                        Még nincs fiókod?<br />
                         <span className="line">
-                            <a href="#">Sign Up</a>
+                            <a href="#">Regisztrálj itt</a>
                         </span>
                     </p>
                 </section >

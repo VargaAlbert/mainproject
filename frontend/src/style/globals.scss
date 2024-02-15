@@ -18,9 +18,7 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+  background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
 }
 
 @layer utilities {
@@ -38,13 +36,17 @@ input:-webkit-autofill:active {
 }
 
 .imputClass {
-  @apply border sm:text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-pink-600 focus:border-pink-600 focus:outline-none
+  @apply border sm:text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-pink-600 focus:border-pink-600 focus:outline-none;
 }
 
 .inputLabel {
-  @apply block mb-2 text-sm font-medium text-white
+  @apply block mb-2 text-sm font-medium text-white;
 }
 
 .butttonClass {
-  @apply w-full text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-primary-600 hover:bg-primary-700 focus:ring-primary-800
+  @apply w-full text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-primary-600 hover:bg-primary-700 focus:ring-primary-800;
+}
+
+.ProductPageContainer {
+  @apply mx-auto max-w-screen-2xl;
 }

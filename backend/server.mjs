@@ -9,7 +9,7 @@ import dotenv from 'dotenv';
 import corsOptions from './config/corsOptions.mjs';
 import connectDB from './config/dbConnection.mjs';
 
-import { logger } from './middleware/logEvents.mjs';
+import { logger, handleMongoDBConnection } from './middleware/logEvents.mjs';
 import errorHandler from './middleware/errorHandler.mjs';
 import verifyJWT from './middleware/verifyJWT.mjs';
 import credentials from './middleware/credentials.mjs';
@@ -19,8 +19,8 @@ import register from './routes/register.mjs';
 import authentication from './routes/auth.mjs';
 import refresh from './routes/refresh.mjs';
 import products from './routes/api/products.mjs';
-import logout from './routes/logout.mjs'
-import users from './routes/api/users.mjs'
+import logout from './routes/logout.mjs';
+import users from './routes/api/users.mjs';
 
 dotenv.config();
 const __filename = fileURLToPath(import.meta.url);
@@ -28,23 +28,36 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const PORT = process.env.PORT || 5005;
 
+/**
+ * Connects to the MongoDB database.
+ *
+ * @function
+ * @name connectDB
+ */
 connectDB();
-// custom middleware logger
+
+// - Custom middleware logger
 app.use(logger);
-// and fetch cookies credentials requirement
+
+// - And fetch cookies credentials requirement
 app.use(credentials);
-// Cross Origin Resource Sharing
+
+// - Cross Origin Resource Sharing
 app.use(cors(corsOptions));
-// built-in middleware to handle urlencoded form data
-app.use(express.urlencoded({ extended: false }))
-// built-in middleware for json 
+
+// - Built-in middleware to handle urlencoded form data
+app.use(express.urlencoded({ extended: false }));
+
+// - Built-in middleware for json
 app.use(express.json());
-//middleware for cookies
+
+// - Middleware for cookies
 app.use(cookieParser());
-//serve static files
+
+// - Serve static files
 app.use(express.static(path.join(__dirname, '/public')));
 
-// routes
+// - Routes
 app.use('/', router);
 app.use('/register', register);
 app.use('/auth', authentication);
@@ -66,9 +79,33 @@ app.all('*', (req, res) => {
     }
 });
 
+/**
+ * Handles errors in the application.
+ *
+ * @function
+ * @name errorHandler
+ */
 app.use(errorHandler);
 
+/**
+ * Handles MongoDB connection events and logs messages.
+ *
+ * @function
+ * @param {string} event - The MongoDB connection event ('connected', 'error', 'disconnected').
+ * @param {string} message - The custom message to be logged.
+ * @returns {void}
+ */
+handleMongoDBConnection('connected', 'MongoDB connected successfully!');
+handleMongoDBConnection('error', 'MongoDB connection error');
+handleMongoDBConnection('disconnected', 'MongoDB disconnected');
+
+/**
+ * Listens for the MongoDB connection and starts the server.
+ *
+ * @event mongoose.connection.once
+ * @type {string}
+ */
 mongoose.connection.once('open', () => {
     console.log('Connected to MongoDB');
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-})
+});

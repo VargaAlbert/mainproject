@@ -1,30 +1,52 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Schema, Document } from "mongoose";
 
+/**
+ * @typedef {Object} Product
+ * @property {string} id - The unique identifier for the product.
+ * @property {string} product - The name of the product.
+ * @property {string} description - The description of the product.
+ * @property {string} img - The URL or path to the product image.
+ * @property {number} price - The price of the product.
+ * @property {string} category - The category to which the product belongs.
+ */
+
+/**
+ * Mongoose schema for the Product model.
+ *
+ * @type {Schema<Product & Document>}
+ */
 const ProductSchema = new Schema({
     id: {
         type: String,
-        require: true
+        required: true
     },
     product: {
         type: String,
-        require: true
+        required: true
     },
     description: {
         type: String,
-        require: true
+        required: true
     },
     img: {
         type: String,
-        require: true
+        required: true
     },
     price: {
         type: Number,
-        require: true
+        required: true
     },
     category: {
         type: String,
-        require: true
+        required: true
     }
 });
 
-export default mongoose.model('Products', ProductSchema);
+/**
+ * Mongoose model for the Product schema.
+ *
+ * @type {import("mongoose").Model<Product & Document>}
+ */
+const ProductModel = mongoose.model('Products', ProductSchema);
+
+export default ProductModel;

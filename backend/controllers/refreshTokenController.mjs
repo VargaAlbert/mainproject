@@ -1,12 +1,22 @@
-// employeesController.mjs
 import jwt from 'jsonwebtoken';
 import User from '../model/UserSchema.mjs';
 import TOKEN_LIFE from '../config/tokenLifeTime.mjs';
 
+/**
+ * Handles the refresh of an access token using a refresh token.
+ *
+ * @function
+ * @async
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ * @returns {Promise<void>} A promise that resolves with the refreshed access token and roles.
+ */
 const handleRefreshToken = async (req, res) => {
     const cookies = req.cookies;
+
     if (!cookies?.jwt) return res.sendStatus(401);
     const refreshToken = cookies.jwt;
+
     res.clearCookie('jwt', { httpOnly: true, sameSite: 'None', secure: true });
 
     const foundUser = await User.findOne({ refreshToken }).exec();
@@ -17,7 +27,8 @@ const handleRefreshToken = async (req, res) => {
             refreshToken,
             process.env.REFRESH_TOKEN_SECRET,
             async (err, decoded) => {
-                if (err) return res.sendStatus(403) //Forbidden
+                if (err) return res.sendStatus(403); // Forbidden
+
                 console.log('attempted refresh token reuse!')
                 const hackedUser = await User.findOne({ username: decoded.username }).exec();
                 hackedUser.refreshToken = [];
@@ -25,12 +36,12 @@ const handleRefreshToken = async (req, res) => {
                 console.log(result);
             }
         )
-        return res.sendStatus(403) //Forbidden
+        return res.sendStatus(403); // Forbidden
     }
 
     const newRefreshTokenArray = foundUser.refreshToken.filter(rt => rt !== refreshToken);
 
-    // evaluate jwt 
+    // Evaluate jwt 
     jwt.verify(
         refreshToken,
         process.env.REFRESH_TOKEN_SECRET,
@@ -41,6 +52,7 @@ const handleRefreshToken = async (req, res) => {
                 const result = await foundUser.save();
                 console.log(result);
             }
+
             if (err || foundUser.username !== decoded.username) return res.sendStatus(403);
 
             // Refresh token was still valid
@@ -61,14 +73,15 @@ const handleRefreshToken = async (req, res) => {
                 process.env.REFRESH_TOKEN_SECRET,
                 { expiresIn: TOKEN_LIFE.REFRESH }
             );
-            // Saving refreshToken with current user
+
+            // Saving refreshToken with the current user
             foundUser.refreshToken = [...newRefreshTokenArray, newRefreshToken];
             const result = await foundUser.save();
 
             // Creates Secure Cookie with refresh token
-            res.cookie('jwt', newRefreshToken, { httpOnly: true, secure: true, sameSite: 'None', maxAge: 24 * 60 * 60 * 1000 });//secure: true!!!!
+            res.cookie('jwt', newRefreshToken, { httpOnly: true, secure: true, sameSite: 'None', maxAge: 24 * 60 * 60 * 1000 });
 
-            res.json({ roles, accessToken })
+            res.json({ roles, accessToken });
         }
     );
 }

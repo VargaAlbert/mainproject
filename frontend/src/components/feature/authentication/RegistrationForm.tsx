@@ -1,13 +1,14 @@
 "use client"
 import { useRef, useState, useEffect } from "react";
+import { useShopContext } from "@/services/providers/ShopContext";
+import axios from "@/services/api/axiosConfig";
+import { useRouter } from 'next/navigation';
+
 import {
     Check,
     Clear,
     Info,
 } from '@mui/icons-material/';
-
-import axios from "@/services/api/axiosConfig";
-import Button from "@/components/UI/authentication/Button";
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -21,6 +22,8 @@ type ResponseType = {
 }
 
 export default function RegistrationForm() {
+    const { handleChangeUIObj } = useShopContext();
+
     const userRef = useRef<HTMLInputElement | null>(null);
     const errRef = useRef<HTMLParagraphElement | null>(null);
 
@@ -37,7 +40,9 @@ export default function RegistrationForm() {
     const [matchFocus, setMatchFocus] = useState(false);
 
     const [errMsg, setErrMsg] = useState('');
-    const [success, setSuccess] = useState(false);
+    const [success, setSuccess] = useState(true);
+
+    const router = useRouter();
 
     useEffect(() => {
         const currentElement = userRef.current;
@@ -80,8 +85,6 @@ export default function RegistrationForm() {
             console.log(response?.accessToken);
             console.log(JSON.stringify(response))
             setSuccess(true);
-            //clear state and controlled inputs
-            //need value attrib on inputs for this
             setUser('');
             setPwd('');
             setMatchPwd('');
@@ -100,14 +103,17 @@ export default function RegistrationForm() {
         }
     }
 
+    const handleOpenLoginMenu = () => {
+        handleChangeUIObj('loginModal', true)
+        router.push('/', undefined);
+    }
+
     return (
         <>
             {success ? (
                 <section>
-                    <h1>Success!</h1>
-                    <p>
-                        <a href="#">Sign In</a>
-                    </p>
+                    <h1 className="py-5">Sikeres Regisztráció!</h1>
+                    <button onClick={handleOpenLoginMenu} className="butttonClass">Bejelentkezés</button>
                 </section>
             ) : (
                 <section
@@ -191,7 +197,6 @@ export default function RegistrationForm() {
                             <Info />
                             Must match the first password input field.
                         </p>
-
 
                         <button
                             className="butttonClass"

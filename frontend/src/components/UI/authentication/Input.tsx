@@ -2,7 +2,7 @@
 
 import React, { ChangeEvent, RefObject } from 'react';
 
-interface InputComponentProps {
+type InputComponentProps = {
     onChange: (e: ChangeEvent<HTMLInputElement>) => void;
     label: string;
     id: string;

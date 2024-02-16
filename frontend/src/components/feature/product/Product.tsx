@@ -12,7 +12,12 @@ type propT = {
 
 export default function Product({ category }: propT) {
 
-    const { filters, setFilters, products, loading, error } = useShopContext();
+    const {
+        setFilters,
+        products,
+        loading,
+        error
+    } = useShopContext();
 
     useEffect(() => {
         setFilters((prevFilters) => ({
@@ -35,7 +40,7 @@ export default function Product({ category }: propT) {
     return (
         <section className='w-full p-8 grid grid-cols-1 gap-8 justify-center items-center justify-items-center md:grid-cols-2 lg:grid-cols-3 lg:gap-12 2xl:grid-cols-4'>
             {products.map((item) => (
-                <ProductPageCard item={item} />
+                <ProductPageCard key={item.productid} item={item} />
             ))}
         </section>
     );

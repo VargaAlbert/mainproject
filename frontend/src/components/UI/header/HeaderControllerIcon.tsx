@@ -9,7 +9,6 @@ import {
     IconButton,
     Menu,
 } from '@mui/material/';
-
 import {
     AccountCircle,
     Person,
@@ -36,7 +35,7 @@ export default function HeaderControllerIcon() {
         setAnchorElUser(null);
     };
 
-    const handleCloseUserMenuu = () => {
+    const handleOpenLoginMenu = () => {
         handleChangeUIObj('loginModal', true)
     }
 
@@ -75,7 +74,7 @@ export default function HeaderControllerIcon() {
             ) : (
                 <Person
                     fontSize="large"
-                    onClick={handleCloseUserMenuu} />
+                    onClick={handleOpenLoginMenu} />
             )}
             <Favorite
                 fontSize="large"

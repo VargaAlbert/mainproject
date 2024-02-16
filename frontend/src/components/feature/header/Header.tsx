@@ -1,6 +1,15 @@
 "use client"
 
 import { useState } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import {
+    ALL_PRODUCTS,
+    PRODUCT_CATEGORY,
+    processString
+} from '@/utils/category';
+
+import HeaderControllerIcon from '@/components/UI/header/HeaderControllerIcon';
 import {
     AppBar,
     Box,
@@ -12,13 +21,9 @@ import {
     MenuItem,
     Container,
 } from '@mui/material/';
-import Link from 'next/link';
 import MenuIcon from '@mui/icons-material/Menu';
-import Image from 'next/image';
 import logo from '@/assets/logo.png'
 
-import HeaderControllerIcon from '@/components/UI/header/HeaderControllerIcon';
-import { ALL_PRODUCTS, PRODUCT_CATEGORY, processString } from '@/utils/category';
 
 
 export default function ResponsiveAppBar() {
@@ -32,7 +37,6 @@ export default function ResponsiveAppBar() {
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
     };
-
 
     return (
         <AppBar position="static">

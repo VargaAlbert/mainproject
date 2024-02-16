@@ -22,8 +22,6 @@ type ShopProviderProps = {
     children: ReactNode;
 };
 
-const PRODUCT_CATEGORY = ["Összes termék, Botok, Kiegészítők, Orsók, Táskák és Camping, Zsinórok"]
-
 interface ShopContextProps {
     setPersist: React.Dispatch<React.SetStateAction<boolean>>;
     setAuth: React.Dispatch<React.SetStateAction<authT>>;
@@ -56,20 +54,16 @@ export const ShopProvider: React.FC<ShopProviderProps> = ({
 
     const [persist, setPersist] = useLocalStorage<boolean>("persist", false);
 
-
     const { data, loading, error } = useFetchData();
-
 
     const products = useProductsFilter(data, filters);
 
-    console.log("context log",products);
     const handleChangeUIObj = (key: string, value: boolean): void => {
         setUiObj({
             ...uiObj,
             [key]: value,
         });
     }
-
 
     const contextValue: ShopContextProps = {
         handleChangeUIObj,
@@ -85,7 +79,6 @@ export const ShopProvider: React.FC<ShopProviderProps> = ({
         error
     };
 
-    console.log('context log', auth)
     return (
         <ShopContext.Provider value={contextValue}>
             {children}

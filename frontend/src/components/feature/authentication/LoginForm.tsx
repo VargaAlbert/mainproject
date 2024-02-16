@@ -4,12 +4,13 @@ import { useRef, useState, useEffect } from 'react';
 import { useShopContext } from "@/services/providers/ShopContext";
 import { useRouter } from 'next/navigation';
 import axios, { LOGIN_URL } from '@/services/api/axiosConfig';
+import { Button } from '@mui/material/';
 
 import useInput from '@/hooks/useInput';
 import useToggle from '@/hooks/useToggle';
 
-import Button from '@/components/UI/authentication/Button';
 import LinkButton from '@/components/UI/LinkButton';
+import Link from 'next/link';
 
 export default function LoginForm() {
 
@@ -138,22 +139,19 @@ export default function LoginForm() {
                                     <label htmlFor="remember" className="text-gray-300">Maradjon belépve</label>
                                 </div>
                             </div>
-                            <a href="#" className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Forgot password?</a>
+                            <a href="#" className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Elfejtett jelszó.</a>
                         </div>
-
-                        <Button
-                            label='Sign In'
-                        />
+                        <button className='butttonClass'>Bejelentkezés</button>
                     </form>
                     <LinkButton
                         label='Registráció'
                         href='/registration'
                         onClick={handleCloseUserMenu}
                     />
-                    <p>
+                    <p className='pt-5'>
                         Még nincs fiókod?<br />
                         <span className="line">
-                            <a href="#">Regisztrálj itt</a>
+                            <Link href="/registration" className='text-sm font-medium text-primary-600 hover:underline dark:text-primary-500'>Regisztrálj itt!</Link>
                         </span>
                     </p>
                 </section >

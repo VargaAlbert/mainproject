@@ -4,11 +4,14 @@ import React from 'react'
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useShopContext } from '@/services/providers/ShopContext';
+import ROLES_LIST from '@/services/rolesConfig';
+
+import useLogout from '@/hooks/useLogouth';
+
 import {
   Typography,
   MenuItem,
 } from '@mui/material/';
-import useLogout from '@/hooks/useLogouth';
 
 interface ControllerMenuItemPropT {
   handleCloseUserMenu: () => void
@@ -35,7 +38,7 @@ export default function ControllerMenuItem({ handleCloseUserMenu }: ControllerMe
         <Typography textAlign="center">Rendeléseim</Typography>
       </MenuItem>
 
-      {auth.roles.includes(8505) && (
+      {auth.roles.includes(ROLES_LIST.Admin) && (
         <>
           <MenuItem onClick={handleCloseUserMenu}>
             <Link href="/adminpage">
@@ -50,7 +53,7 @@ export default function ControllerMenuItem({ handleCloseUserMenu }: ControllerMe
         </>
       )}
 
-      {auth.roles.includes(3540) && (
+      {auth.roles.includes(ROLES_LIST.Editor) && (
         <MenuItem onClick={handleCloseUserMenu}>
           <Link href="/adminpage">
             <Typography textAlign="center">Editor Page</Typography>

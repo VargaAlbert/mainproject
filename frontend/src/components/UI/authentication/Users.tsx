@@ -29,10 +29,8 @@ export default function Users() {
                 const response = await axiosPrivate.get('/users', {
                     signal: controller.signal
                 });
-                console.log(response.data);
                 setUsers(response.data);
             } catch (err) {
-                console.error(err);
                 router.push('/', undefined);
                 handleLogouth();
             }

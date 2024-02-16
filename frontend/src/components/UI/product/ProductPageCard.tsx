@@ -31,7 +31,7 @@ export default function ProductPageCard({ item }: propT) {
     } = item;
 
     return (
-        <Card key={productid} className='max-w-sm h-full flex flex-col justify-between'>
+        <Card className='max-w-sm h-full flex flex-col justify-between'>
             <CardMedia
                 component="img"
                 alt={`img-${productid}`}

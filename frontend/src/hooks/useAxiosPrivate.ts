@@ -3,6 +3,17 @@ import { useEffect } from "react";
 import useRefreshToken from "./useRefreshToken";
 import { useShopContext } from '@/services/providers/ShopContext';
 
+/**
+ * Custom hook for handling private Axios requests with token authentication.
+ *
+ * @returns {AxiosInstance} An instance of Axios configured for private requests.
+ * @throws {Error} Throws an error if authentication context or refresh token function is not provided.
+ * @example
+ * 
+ * Usage in a React component
+ * const axiosPrivate = useAxiosPrivate();
+ * axiosPrivate.get('/api/data').then(response => console.log(response.data));
+ */
 const useAxiosPrivate = () => {
     const refresh = useRefreshToken();
     const { auth } = useShopContext();

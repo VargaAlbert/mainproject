@@ -1,10 +1,20 @@
-"use client"
 import { useContext, useDebugValue } from "react";
-import ShopContext from '@/services/providers/ShopContext';
+import ShopContext, { ShopContextProps } from '@/services/providers/ShopContext';
 
-const useAuth = () => {
+/**
+ * A custom hook for accessing authentication-related information from the ShopContext.
+ *
+ * @returns {ShopContextProps} The authentication context containing user information.
+ * @example
+ * const authContext = useAuth();
+ * console.log(authContext.auth); // Access the authentication information.
+ */
+const useAuth = (): ShopContextProps => {
     const { auth } = useContext(ShopContext);
-    useDebugValue(auth, auth => auth?.user ? "Logged In" : "Logged Out")
+
+    // Display authentication status in React DevTools
+    useDebugValue(auth, auth => auth?.user ? "Logged In" : "Logged Out");
+
     return useContext(ShopContext);
 }
 

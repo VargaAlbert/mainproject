@@ -1,6 +1,18 @@
 import { useState, useEffect, useRef } from 'react';
 import axios from '@/services/api/axiosConfig';
 
+/**
+ * A custom hook for fetching data from the server using Axios. 
+ * The productT definition can be found in @/services/types.d.ts
+ *
+ * @returns {{
+*   data: ProductT[];
+*   loading: boolean;
+*   error: string | null;
+* }} The fetched data, loading state, and error information.
+* @example
+* const { data, loading, error } = useFetchData();
+*/
 const useFetchData = () => {
   const [data, setData] = useState<productT[]>([]);
   const [loading, setLoading] = useState<boolean>(true);

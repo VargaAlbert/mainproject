@@ -15,6 +15,7 @@ const useLocalStorage = <T>(key: string, initValue: T | (() => T)) => {
         return getLocalValue(key, initValue);
     });
 
+    // If the key or value changes, updates the item in local storage.
     useEffect(() => {
         localStorage.setItem(key, JSON.stringify(value));
     }, [key, value]);

@@ -22,7 +22,7 @@ type ShopProviderProps = {
     children: ReactNode;
 };
 
-interface ShopContextProps {
+export interface ShopContextProps {
     setPersist: React.Dispatch<React.SetStateAction<boolean>>;
     setAuth: React.Dispatch<React.SetStateAction<authT>>;
     setFilters: React.Dispatch<React.SetStateAction<filterT>>;

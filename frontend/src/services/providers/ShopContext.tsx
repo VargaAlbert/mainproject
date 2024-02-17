@@ -38,7 +38,7 @@ export interface ShopContextProps {
     error: string | null;
 };
 
-const ShopContext = createContext({} as ShopContextProps)
+export const ShopContext = createContext({} as ShopContextProps)
 
 export const useShopContext = () => {
     return useContext(ShopContext);

@@ -13,7 +13,7 @@ import {
   MenuItem,
 } from '@mui/material/';
 
-interface ControllerMenuItemPropT {
+type ControllerMenuItemPropT = {
   handleCloseUserMenu: () => void
 }
 

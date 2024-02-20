@@ -3,7 +3,7 @@
  * @module useUserInterfaceDisplay
  */
 
-import { initUiObj } from "@/services/initConfig";
+
 import { useState } from "react";
 
 type uiKeyT = {
@@ -12,9 +12,13 @@ type uiKeyT = {
 
 /**
  * Object containing keys for UI interfaces.
- */
+*/
 export const INTER_FACE_KEY: uiKeyT = {
     LOGIN_MODAL: "LOGIN_MODAL"
+}
+
+export const initUiObj: uiObjT = {
+    [INTER_FACE_KEY.LOGIN_MODAL]: false,
 }
 
 /**
@@ -40,7 +44,7 @@ const useUserInterfaceDisplay = () => {
         });
     };
 
-    return { userInterfaceDisplay, setUserInterface };
+    return { userInterfaceDisplay, setUserInterface, INTER_FACE_KEY };
 }
 
 export default useUserInterfaceDisplay;

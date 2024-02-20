@@ -1,6 +1,8 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import useProductAddCart from '../useProductsAddCart';
 
+const TEST_QUANTITY = 3;
+const START_TEST_TEST_QUANTITY = 7;
 describe('useProductAddCart', () => {
     beforeEach(() => {
         // Reset local storage before each test
@@ -10,7 +12,7 @@ describe('useProductAddCart', () => {
     it('should add products to the cart', () => {
         // Render the component that uses the hook
         const TestComponent = () => {
-            const { cartItems, productAddCart } = useProductAddCart();
+            const { cartItems, productAddCart, findQuantityById } = useProductAddCart();
 
             return (
                 <div>
@@ -39,33 +41,59 @@ describe('useProductAddCart', () => {
         expect(screen.getByText('2 items in the cart')).toBeInTheDocument();
     });
 
-    it('should update quantities in the cart', () => {
-        // Render the component that uses the hook
-        const TestComponent = () => {
-            const { cartItems, productAddCart } = useProductAddCart();
+    it.each(Array.from({ length: 10 }, (_, index) => [index + 1]))(
+        'should update quantities in the cart productAddCart(quantity, "product", true!)',
+        (quantity) => {
+            // Render the component that uses the hook
+            const TestComponent = () => {
+                const { productAddCart, findQuantityById } = useProductAddCart();
 
-            return (
-                <div>
-                    <div>{cartItems.length} items in the cart</div>
-                    <button onClick={() => productAddCart(1, 'product-1', true)}>Add Product 1</button>
-                </div>
-            );
-        };
+                return (
+                    <div>
+                        <div>
+                            product-1 {findQuantityById('product-1')} quantity in the cart
+                        </div>
+                        <button onClick={() => productAddCart(TEST_QUANTITY, 'product-1', true)}>
+                            Add Product 1
+                        </button>
+                    </div>
+                );
+            };
 
-        render(<TestComponent />);
+            render(<TestComponent />);
 
-        // Trigger the button click to add Product 1
-        fireEvent.click(screen.getByText('Add Product 1'));
+            for (let i = 0; i < quantity; i++) {
+                fireEvent.click(screen.getByText('Add Product 1'));
+            }
 
-        // Check if Product 1 is added to the cart with quantity 1
-        expect(screen.getByText('1 items in the cart')).toBeInTheDocument();
+            expect(screen.getByText(`product-1 ${quantity * TEST_QUANTITY} quantity in the cart`)).toBeInTheDocument();
+        }
+    );
 
-        // Trigger the button click again to update quantity to 2
-        fireEvent.click(screen.getByText('Add Product 1'));
 
-        // Check if Product 1 quantity is updated to 2 in the cart
-        expect(screen.getByText('2 items in the cart')).toBeInTheDocument();
-    });
+
+    test.each(Array.from({ length: 10 }, (_, index) => index + START_TEST_TEST_QUANTITY))(
+        'should update quantities in the cart productAddCart(quantity, "product", false!)',
+        (iterationIndex) => {
+            console.log(iterationIndex)
+            const TestComponent = () => {
+                const { productAddCart, findQuantityById } = useProductAddCart();
+
+                return (
+                    <div>
+                        <div>product-1 {findQuantityById('product-1')} quantity in the cart</div>
+                        <button onClick={() => productAddCart(iterationIndex, 'product-1', false)}>Add Product 1</button>
+                    </div>
+                );
+            };
+
+            render(<TestComponent />);
+
+            fireEvent.click(screen.getByText('Add Product 1'));
+
+            expect(screen.getByText(`product-1 ${iterationIndex} quantity in the cart`)).toBeInTheDocument();
+        }
+    );
 
     it('should remove products from the cart', () => {
         // Render the component that uses the hook
@@ -95,4 +123,5 @@ describe('useProductAddCart', () => {
         // Check if Product 1 is removed from the cart
         expect(screen.getByText('0 items in the cart')).toBeInTheDocument();
     });
+
 });

@@ -1,6 +1,7 @@
 "use client"
 
 import React from 'react';
+import { INTER_FACE_KEY } from '@/hooks/useUserInterfaceDisplay'
 import { useShopContext } from '@/services/providers/ShopContext';
 
 import { Box, Modal } from '@mui/material/';
@@ -20,13 +21,13 @@ const style = {
 
 export default function LoginModal() {
 
-    const { uiObj, handleChangeUIObj } = useShopContext();
+    const { userInterfaceDisplay, setUserInterface } = useShopContext();
 
-    const handleClose = () => handleChangeUIObj('loginModal', false);
+    const handleClose = () => setUserInterface(INTER_FACE_KEY.LOGIN_MODAL, false);
 
     return (
         <Modal
-            open={uiObj.loginModal}
+            open={userInterfaceDisplay.LOGIN_MODAL}
             onClose={handleClose}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"

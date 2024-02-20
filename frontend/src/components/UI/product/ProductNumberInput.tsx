@@ -36,20 +36,25 @@ const NumberInput = React.forwardRef(function CustomNumberInput(
     );
 });
 
-export default function ProductNumberInput() {
+type ProductNumberInputProps = {
+    value: number | null;
+    onChange: (newValue: number | null) => void;
+}
 
-    const [value, setValue] = useState<number | null>(1);
+export default function ProductNumberInput({ value, onChange }: ProductNumberInputProps) {
 
     const handleChange = (newValue: number | null) => {
-        setValue(newValue ?? null);
+        onChange(newValue);
     };
 
-    console.log(value);
-
-    return <NumberInput onChange={(event, newValue) => {
-        console.log(`${event.type} event: the new value is ${newValue}`)
-        handleChange(newValue);
-    }} aria-label="Quantity Input" min={1} max={999} defaultValue={1} />;
+    return <NumberInput
+        onChange={(event, newValue) => {
+            handleChange(newValue);
+        }}
+        aria-label="Quantity Input"
+        value={value}
+        min={1} max={999}
+        defaultValue={1} />;
 }
 
 /* const blue = {

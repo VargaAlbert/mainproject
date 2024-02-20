@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useShopContext } from '@/services/providers/ShopContext';
-import useUserInterfaceDisplay, { INTER_FACE_KEY } from '@/hooks/useUserInterfaceDisplay';
+import { INTER_FACE_KEY } from '@/hooks/useUserInterfaceDisplay';
 
 import {
     Tooltip,
@@ -21,9 +21,8 @@ import ControllerMenuItem from './ControllerMenuItem';
 
 export default function HeaderControllerIcon() {
 
-    const { auth } = useShopContext();
+    const { auth, setUserInterface } = useShopContext();
 
-    const { setUserInterface } = useUserInterfaceDisplay();
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
 
@@ -36,7 +35,7 @@ export default function HeaderControllerIcon() {
     };
 
     const handleOpenLoginMenu = () => {
-        setUserInterface(INTER_FACE_KEY.LOGIN_MODAL, true)
+        setUserInterface(INTER_FACE_KEY?.LOGIN_MODAL, true)
     }
 
     return (

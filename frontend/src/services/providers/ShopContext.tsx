@@ -11,7 +11,6 @@ import React, {
 import useLocalStorage from "@/hooks/useLocalStorage";
 
 import {
-    initUiObj,
     initAuth,
     initFilter
 } from "../initConfig";
@@ -54,11 +53,11 @@ export const ShopProvider: React.FC<ShopProviderProps> = ({
 
     const [persist, setPersist] = useLocalStorage<boolean>("persist", false);
 
+    const { userInterfaceDisplay, setUserInterface } = useUserInterfaceDisplay();
+
     const { data, loading, error } = useFetchData();
 
     const products = useProductsFilter(data, filters);
-
-    const { userInterfaceDisplay, setUserInterface } = useUserInterfaceDisplay();
 
     const contextValue: ShopContextProps = {
         setUserInterface,

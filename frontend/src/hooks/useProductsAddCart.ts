@@ -57,7 +57,7 @@ const useProductAddCart = () => {
                     return item;
                 });
             }
-        });
+        }); 
     };
 
     /**
@@ -72,7 +72,17 @@ const useProductAddCart = () => {
         });
     };
 
-    return { cartItems, productAddCart, removeFromCart };
+    /**
+     * Finds the quantity of a product in the shopping cart by its id.
+     * @function
+     * @param {string} id - Product identifier to search for.
+     * @returns {number | null} - Quantity of the product if found, or null if not found.
+     */
+    const findQuantityById = (id: string): number | null => {
+        return cartItems.find((item) => item.id === id)?.quantity || null;
+    };
+
+    return { cartItems, productAddCart, removeFromCart, findQuantityById };
 };
 
 export default useProductAddCart;

@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useShopContext } from '@/services/providers/ShopContext';
+import useUserInterfaceDisplay, { INTER_FACE_KEY } from '@/hooks/useUserInterfaceDisplay';
 
 import {
     Tooltip,
@@ -20,12 +21,11 @@ import ControllerMenuItem from './ControllerMenuItem';
 
 export default function HeaderControllerIcon() {
 
+    const { auth } = useShopContext();
+
+    const { setUserInterface } = useUserInterfaceDisplay();
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
-    const {
-        handleChangeUIObj,
-        auth,
-    } = useShopContext();
 
     const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElUser(event.currentTarget);
@@ -36,16 +36,17 @@ export default function HeaderControllerIcon() {
     };
 
     const handleOpenLoginMenu = () => {
-        handleChangeUIObj('loginModal', true)
+        setUserInterface(INTER_FACE_KEY.LOGIN_MODAL, true)
     }
 
     return (
         <Box sx={{ display: 'flex', gap: '1rem', flexGrow: 0 }}>
             {auth?.accessToken ? (
                 <Box >
-                    <Tooltip title="Open settings">
+                    <Tooltip title="Profilom">
                         <IconButton onClick={handleOpenUserMenu} color="inherit" sx={{ p: 0 }}>
                             <AccountCircle
+                                className='hover:text-primary-500'
                                 fontSize="large"
                             />
                         </IconButton>
@@ -73,14 +74,16 @@ export default function HeaderControllerIcon() {
                 </Box>
             ) : (
                 <Person
+                    className='hover:text-primary-500'
                     fontSize="large"
                     onClick={handleOpenLoginMenu} />
             )}
-            <Favorite
-                fontSize="large"
-            />
-            <ShoppingCart
-                fontSize="large" sx={{ marginRight: 2 }} />
+            <Tooltip className='cursor-pointer' title="Kedvenceim">
+                <Favorite className='hover:text-primary-500' fontSize="large" />
+            </Tooltip>
+            <Tooltip className='cursor-pointer' title="Kosaram">
+                <ShoppingCart className='hover:text-primary-500' fontSize="large" sx={{ marginRight: 2 }} />
+            </Tooltip>
         </Box>
     )
 }

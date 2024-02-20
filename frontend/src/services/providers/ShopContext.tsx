@@ -17,6 +17,7 @@ import {
 } from "../initConfig";
 import useFetchData from "@/hooks/useFetchProducts";
 import useProductsFilter from "@/hooks/useProductsFilter";
+import useUserInterfaceDisplay from "@/hooks/useUserInterfaceDisplay";
 
 type ShopProviderProps = {
     children: ReactNode;
@@ -27,11 +28,11 @@ export interface ShopContextProps {
     setAuth: React.Dispatch<React.SetStateAction<authT>>;
     setFilters: React.Dispatch<React.SetStateAction<filterT>>;
 
-    handleChangeUIObj: (key: string, value: boolean) => void;
+    setUserInterface: (key: string, value: boolean) => void;
 
     products: productT[];
     filters: filterT;
-    uiObj: uiObjT;
+    userInterfaceDisplay: uiObjT;
     auth: authT;
     persist: boolean;
     loading: boolean;
@@ -48,7 +49,6 @@ export const ShopProvider: React.FC<ShopProviderProps> = ({
     children
 }) => {
 
-    const [uiObj, setUiObj] = useState<uiObjT>(initUiObj)
     const [auth, setAuth] = useState<authT>(initAuth);
     const [filters, setFilters] = useState<filterT>(initFilter)
 
@@ -58,16 +58,11 @@ export const ShopProvider: React.FC<ShopProviderProps> = ({
 
     const products = useProductsFilter(data, filters);
 
-    const handleChangeUIObj = (key: string, value: boolean): void => {
-        setUiObj({
-            ...uiObj,
-            [key]: value,
-        });
-    }
+    const { userInterfaceDisplay, setUserInterface } = useUserInterfaceDisplay();
 
     const contextValue: ShopContextProps = {
-        handleChangeUIObj,
-        uiObj,
+        setUserInterface,
+        userInterfaceDisplay,
         setAuth,
         auth,
         persist,

@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, FormEvent } from 'react';
 import { useShopContext } from "@/services/providers/ShopContext";
 import { useRouter } from 'next/navigation';
 import axios, { LOGIN_URL } from '@/services/api/axiosConfig';
@@ -37,7 +37,7 @@ export default function LoginForm() {
         setErrMsg('');
     }, [user, pwd])
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
             const response = await axios.post(LOGIN_URL,

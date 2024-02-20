@@ -125,14 +125,16 @@ export default function ResponsiveAppBar() {
                             />
                         </Link>
                     </Box>
-                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'center' }}>
+                    <Box className="flex-grow hidden lg:flex justify-center">
                         <Link
                             href='/products'
                             className="my-2 text-white block"
                             onClick={handleCloseNavMenu}
                         >
-                            <Button>
-                                {ALL_PRODUCTS}
+                            <Button className='group'>
+                                <p className='text-white group-hover:text-primary-400'>
+                                    {ALL_PRODUCTS}
+                                </p>
                             </Button>
                         </Link>
                         {PRODUCT_CATEGORY.map((page) => (
@@ -142,8 +144,8 @@ export default function ResponsiveAppBar() {
                                 key={page}
                                 onClick={handleCloseNavMenu}
                             >
-                                <Button>
-                                    {page}
+                                <Button className='group'>
+                                    <p className='text-white group-hover:text-primary-400'>{page}</p>
                                 </Button>
                             </Link>
                         ))}

@@ -31,3 +31,8 @@ type productT = {
 type filterT = {
     category?: string
 }
+
+type CartItem = {
+    id: string;
+    quantity: number;
+};

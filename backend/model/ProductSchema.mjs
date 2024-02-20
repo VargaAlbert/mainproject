@@ -2,7 +2,7 @@ import mongoose, { Schema, Document } from "mongoose";
 
 /**
  * @typedef {Object} Product
- * @property {string} id - The unique identifier for the product.
+ * @property {string} productid - The unique identifier for the product.
  * @property {string} product - The name of the product.
  * @property {string} description - The description of the product.
  * @property {string} img - The URL or path to the product image.
@@ -16,7 +16,7 @@ import mongoose, { Schema, Document } from "mongoose";
  * @type {Schema<Product & Document>}
  */
 const ProductSchema = new Schema({
-    id: {
+    productid: {
         type: String,
         required: true
     },

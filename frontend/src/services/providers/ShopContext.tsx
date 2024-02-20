@@ -17,6 +17,7 @@ import {
 import useFetchData from "@/hooks/useFetchProducts";
 import useProductsFilter from "@/hooks/useProductsFilter";
 import useUserInterfaceDisplay from "@/hooks/useUserInterfaceDisplay";
+import useProductAddCart from "@/hooks/useProductsAddCart";
 
 type ShopProviderProps = {
     children: ReactNode;
@@ -27,15 +28,20 @@ export interface ShopContextProps {
     setAuth: React.Dispatch<React.SetStateAction<authT>>;
     setFilters: React.Dispatch<React.SetStateAction<filterT>>;
 
+    productAddCart: (quantityOfProduct: number, id: string, isSelfIncrease: boolean) => void;
     setUserInterface: (key: string, value: boolean) => void;
 
+    cartItems: CartItem[];
     products: productT[];
+
     filters: filterT;
     userInterfaceDisplay: uiObjT;
     auth: authT;
+
+    error: string | null;
+
     persist: boolean;
     loading: boolean;
-    error: string | null;
 };
 
 export const ShopContext = createContext({} as ShopContextProps)
@@ -57,6 +63,8 @@ export const ShopProvider: React.FC<ShopProviderProps> = ({
 
     const { data, loading, error } = useFetchData();
 
+    const { cartItems, productAddCart } = useProductAddCart();
+
     const products = useProductsFilter(data, filters);
 
     const contextValue: ShopContextProps = {
@@ -70,7 +78,9 @@ export const ShopProvider: React.FC<ShopProviderProps> = ({
         setFilters,
         products,
         loading,
-        error
+        error,
+        cartItems,
+        productAddCart,
     };
 
     return (

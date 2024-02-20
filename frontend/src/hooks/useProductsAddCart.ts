@@ -6,17 +6,6 @@
 import useLocalStorage from './useLocalStorage';
 
 /**
- * Type definition for a shopping cart item.
- * @typedef {Object} CartItem
- * @property {string} id - Product identifier.
- * @property {number} quantity - Quantity of the product in the cart.
- */
-type CartItem = {
-    id: string;
-    quantity: number;
-};
-
-/**
  * Hook for managing shopping cart items.
  * @returns {Object} An object containing cartItems, productAddCart, and removeFromCart.
  * @property {CartItem[]} cartItems - Array of shopping cart items.
@@ -26,6 +15,8 @@ type CartItem = {
  * const { cartItems, productAddCart, removeFromCart } = useProductAddCart();
  * productAddCart(1, 'product-id', true);
  * removeFromCart('product-id');
+ * The CartItem[] definition can be found in @/services/types.d.ts
+ * 
  */
 const useProductAddCart = () => {
     const [cartItems, setCartItems] = useLocalStorage<CartItem[]>("shopping-cart", []);

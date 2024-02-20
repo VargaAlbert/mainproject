@@ -1,6 +1,9 @@
 "use client"
 
 import React from 'react';
+import { formatPrice } from '@/utils/formatPrice';
+import useProductAddCart from '@/hooks/useProductsAddCart';
+import { useShopContext } from '@/services/providers/ShopContext';
 
 import {
     Card,
@@ -13,7 +16,6 @@ import {
 } from '@mui/material';
 
 import { Favorite } from '@mui/icons-material/';
-import { formatPrice } from '@/utils/formatPrice';
 
 type propT = {
     item: productT
@@ -21,6 +23,9 @@ type propT = {
 
 export default function ProductPageCard({ item }: propT) {
 
+    const { cartItems, productAddCart } = useShopContext();
+
+    console.log(cartItems)
     const {
         productid,
         product,
@@ -47,7 +52,11 @@ export default function ProductPageCard({ item }: propT) {
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button className="w-full text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-primary-600 hover:bg-primary-700 focus:ring-primary-800">Kosárba</Button>
+                <Button
+                    onClick={() => { productAddCart(1, productid, true) }}
+                    className="w-full text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-primary-600 hover:bg-primary-700 focus:ring-primary-800">
+                    Kosárba
+                </Button>
                 <IconButton size="small">
                     <Favorite className="text-4xl text-primary-600" />
                 </IconButton>

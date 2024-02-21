@@ -106,6 +106,10 @@ export default function RegistrationForm() {
         router.push('/', undefined);
     }
 
+    const handleOpenLoginMenuLink = () => {
+        setUserInterface(INTER_FACE_KEY?.LOGIN_MODAL, true)
+    }
+
     return (
         <>
             {success ? (
@@ -123,7 +127,7 @@ export default function RegistrationForm() {
                     >
 
                         <label htmlFor="username" className="flex">
-                            Username:
+                            Email címed:
                             <Check className={validName ? "block" : "hidden"} />
                             <Clear className={validName || !user ? "hidden" : "block"} />
                         </label>
@@ -150,7 +154,7 @@ export default function RegistrationForm() {
 
 
                         <label htmlFor="password" className="flex">
-                            Password:
+                            Jeszó:
                             <Check className={validPwd ? "block" : "hidden"} />
                             <Clear className={validPwd || !pwd ? "hidden" : "block"} />
                         </label>
@@ -175,7 +179,7 @@ export default function RegistrationForm() {
 
 
                         <label htmlFor="confirm_pwd" className="flex">
-                            Confirm Password:
+                            Jeszó újra:
                             <Check className={validMatch && matchPwd ? "block" : "hidden"} />
                             <Clear className={validMatch || !matchPwd ? "hidden" : "block"} />
                         </label>
@@ -198,13 +202,13 @@ export default function RegistrationForm() {
 
                         <button
                             className="butttonClass"
-                            disabled={!validName || !validPwd || !validMatch ? true : false}>Sign Up</button>
+                            disabled={!validName || !validPwd || !validMatch ? true : false}>Regisztrálok</button>
                     </form>
 
                     <p>
-                        Already registered?<br />
+                        Már regisztráltá?<br />
                         <span className="line">
-                            <a href="#">Sign In</a>
+                            <a className='cursor-pointer' onClick={handleOpenLoginMenuLink}>Bejelentkezés</a>
                         </span>
                     </p>
                 </section>

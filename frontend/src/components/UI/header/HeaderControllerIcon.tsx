@@ -43,7 +43,7 @@ export default function HeaderControllerIcon() {
             {auth?.accessToken ? (
                 <Box >
                     <Tooltip title="Profilom">
-                        <IconButton onClick={handleOpenUserMenu} color="inherit" sx={{ p: 0 }}>
+                        <IconButton onClick={handleOpenUserMenu} size="large" color="inherit" className="p-0">
                             <AccountCircle
                                 className='hover:text-primary-500'
                                 fontSize="large"
@@ -78,10 +78,12 @@ export default function HeaderControllerIcon() {
                     onClick={handleOpenLoginMenu} />
             )}
             <Tooltip className='cursor-pointer' title="Kedvenceim">
-                <Favorite className='hover:text-primary-500' fontSize="large" />
+                <IconButton size="large" color="inherit" className="p-0">
+                    <Favorite className='hover:text-primary-500' fontSize="large" />
+                </IconButton>
             </Tooltip>
             <Tooltip className='cursor-pointer' title="Kosaram">
-                <IconButton onClick={toggleDrawer('right', true)} color="inherit" sx={{ p: 0 }}>
+                <IconButton onClick={toggleDrawer('right', true)} size="large" color="inherit" className="p-0">
                     <ShoppingCart
                         className='hover:text-primary-500'
                         fontSize="large" />

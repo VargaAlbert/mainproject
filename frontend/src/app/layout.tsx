@@ -6,7 +6,8 @@ import { ThemeProvider } from '@mui/material/styles';
 import Header from "@/components/feature/header/ResponsiveAppBar";
 import LoginModal from "@/components/feature/authentication/LoginModal";
 import PersistLogin from "@/components/feature/authentication/PersitstLogin";
-
+import MaterialDrawer from '@/components/feature/MaterialDrawer'
+import ProductCart from "@/components/feature/product/ProductCart";
 import "../style/globals.scss"
 
 export const metadata: Metadata = {
@@ -29,6 +30,9 @@ export default function RootLayout({
             <LoginModal />
             <PersistLogin>
               {children}
+              <MaterialDrawer>
+                <ProductCart anchor={"right"} />
+              </MaterialDrawer>
             </PersistLogin>
           </ShopProvider>
         </ThemeProvider>

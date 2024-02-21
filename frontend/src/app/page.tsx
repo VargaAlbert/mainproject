@@ -11,9 +11,10 @@ import {
   IconButton
 } from '@mui/material';
 import useProductAddCart from '@/hooks/useProductsAddCart';
+import { useShopContext } from '@/services/providers/ShopContext';
 export default function Home() {
 
-  const { cartItems, productAddCart } = useProductAddCart();
+  const { cartItems, toggleDrawer } = useShopContext();
 
   const [value, setValue] = useState<number>(1);
 
@@ -24,7 +25,7 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <Button onClick={() => { productAddCart(value, "55", true) }}>Kosárba</Button>
+      <Button onClick={toggleDrawer('right', true)}>Kosárba</Button>
       <ProductNumberInput value={value} onChange={handleChange} />
     </main>
   );

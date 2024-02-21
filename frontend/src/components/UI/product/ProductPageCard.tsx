@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { formatPrice } from '@/utils/formatPrice';
-import useProductAddCart from '@/hooks/useProductsAddCart';
 import { useShopContext } from '@/services/providers/ShopContext';
 
 import {
@@ -17,23 +16,17 @@ import {
 
 import { Favorite } from '@mui/icons-material/';
 
-type propT = {
-    item: productT
-}
-
-export default function ProductPageCard({ item }: propT) {
+export default function ProductPageCard({
+    productid,
+    product,
+    description,
+    img,
+    price,
+    category,
+}: productT) {
 
     const { cartItems, productAddCart } = useShopContext();
 
-    console.log(cartItems)
-    const {
-        productid,
-        product,
-        description,
-        img,
-        price,
-        category,
-    } = item;
 
     return (
         <Card className='max-w-sm h-full flex flex-col justify-between transform hover:scale-105 transition-transform duration-300 ease-in-out'>

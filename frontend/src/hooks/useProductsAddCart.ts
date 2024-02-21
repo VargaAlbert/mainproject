@@ -19,7 +19,7 @@ import useLocalStorage from './useLocalStorage';
  * 
  */
 const useProductAddCart = () => {
-    const [cartItems, setCartItems] = useLocalStorage<CartItem[]>("shopping-cart", []);
+    const [cartItems, setCartItems] = useLocalStorage<CartItemT[]>("shopping-cart", []);
 
     /**
      * Adds or updates a product in the shopping cart.

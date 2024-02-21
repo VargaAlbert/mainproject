@@ -1,5 +1,16 @@
+type uiKeyT = {
+    [key: string]: string
+}
+
+type Anchor = 'top' | 'left' | 'bottom' | 'right';
+
+type DrawerState = {
+    [key in Anchor]: boolean;
+};
+
 type uiObjT = {
-    [key: string]: boolean
+    LOGIN_MODAL: boolean;
+    DRAWER: DrawerState;
 }
 
 type authT = {
@@ -32,7 +43,7 @@ type filterT = {
     category?: string
 }
 
-type CartItem = {
+type CartItemT = {
     id: string;
     quantity: number;
 };

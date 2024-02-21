@@ -6,20 +6,36 @@
 
 import { useState } from "react";
 
-type uiKeyT = {
-    [key: string]: string;
+type Anchor = 'top' | 'left' | 'bottom' | 'right';
+
+type DrawerState = {
+    [key in Anchor]: boolean;
+};
+
+type uiObjT = {
+    LOGIN_MODAL: boolean;
+    DRAWER: DrawerState;
 }
 
 /**
  * Object containing keys for UI interfaces.
-*/
+ */
 export const INTER_FACE_KEY: uiKeyT = {
-    LOGIN_MODAL: "LOGIN_MODAL"
+    LOGIN_MODAL: "LOGIN_MODAL",
+    DRAWER: "DRAWER"
 }
 
 export const initUiObj: uiObjT = {
-    [INTER_FACE_KEY.LOGIN_MODAL]: false,
+    LOGIN_MODAL: false,
+    DRAWER: {
+        top: false,
+        left: false,
+        bottom: false,
+        right: false,
+    },
 }
+
+
 
 /**
  * Hook for managing UI states.
@@ -44,7 +60,33 @@ const useUserInterfaceDisplay = () => {
         });
     };
 
-    return { userInterfaceDisplay, setUserInterface, INTER_FACE_KEY };
+     /**
+     * Toggles the drawer state for the specified anchor.
+     * @param {Anchor} anchor - Drawer anchor.
+     * @param {boolean} open - Whether to open or close the drawer.
+     */
+     const toggleDrawer =
+     (anchor: Anchor, open: boolean) =>
+     (event: React.KeyboardEvent | React.MouseEvent) => {
+             if (
+                 event.type === 'keydown' &&
+                 ((event as React.KeyboardEvent).key === 'Tab' ||
+                     (event as React.KeyboardEvent).key === 'Shift')
+             ) {
+                 return;
+             }
+
+             setUserInterfaceDisplay({
+                ...userInterfaceDisplay,
+                DRAWER: {
+                    ...userInterfaceDisplay.DRAWER,
+                    [anchor]: open
+                }
+            });
+         };
+
+
+    return { userInterfaceDisplay, setUserInterface, INTER_FACE_KEY, toggleDrawer };
 }
 
 export default useUserInterfaceDisplay;

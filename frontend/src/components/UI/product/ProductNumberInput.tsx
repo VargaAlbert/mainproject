@@ -1,60 +1,60 @@
 "use client"
 
-import React, { ChangeEvent, DO_NOT_USE_OR_YOU_WILL_BE_FIRED_EXPERIMENTAL_FORM_ACTIONS, useState } from 'react';
+import React from 'react';
 import {
-    Unstable_NumberInput as BaseNumberInput,
-    NumberInputProps,
+  Unstable_NumberInput as BaseNumberInput,
+  NumberInputProps,
 } from '@mui/base/Unstable_NumberInput';
 import { styled } from '@mui/system';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 
 const NumberInput = React.forwardRef(function CustomNumberInput(
-    props: NumberInputProps,
-    ref: React.ForwardedRef<HTMLDivElement>,
+  props: NumberInputProps,
+  ref: React.ForwardedRef<HTMLDivElement>,
 ) {
-    return (
-        <BaseNumberInput
-            slots={{
-                root: StyledInputRoot,
-                input: StyledInput,
-                incrementButton: StyledButton,
-                decrementButton: StyledButton,
-            }}
-            slotProps={{
-                incrementButton: {
-                    children: <AddIcon fontSize="small" />,
-                    className: 'increment',
-                },
-                decrementButton: {
-                    children: <RemoveIcon fontSize="small" />,
-                },
-            }}
-            {...props}
-            ref={ref}
-        />
-    );
+  return (
+    <BaseNumberInput
+      slots={{
+        root: StyledInputRoot,
+        input: StyledInput,
+        incrementButton: StyledButton,
+        decrementButton: StyledButton,
+      }}
+      slotProps={{
+        incrementButton: {
+          children: <AddIcon fontSize="small" />,
+          className: 'increment',
+        },
+        decrementButton: {
+          children: <RemoveIcon fontSize="small" />,
+        },
+      }}
+      {...props}
+      ref={ref}
+    />
+  );
 });
 
 type ProductNumberInputProps = {
-    value: number | null;
-    onChange: (newValue: number | null) => void;
+  value: number | null;
+  onChange: (newValue: number | null) => void;
 }
 
 export default function ProductNumberInput({ value, onChange }: ProductNumberInputProps) {
 
-    const handleChange = (newValue: number | null) => {
-        onChange(newValue);
-    };
+  const handleChange = (newValue: number | null) => {
+    onChange(newValue);
+  };
 
-    return <NumberInput
-        onChange={(event, newValue) => {
-            handleChange(newValue);
-        }}
-        aria-label="Quantity Input"
-        value={value}
-        min={1} max={999}
-        defaultValue={1} />;
+  return <NumberInput
+    onChange={(event, newValue) => {
+      handleChange(newValue);
+    }}
+    aria-label="Quantity Input"
+    value={value}
+    min={1} max={999}
+    defaultValue={1} />;
 }
 
 /* const blue = {
@@ -69,33 +69,33 @@ export default function ProductNumberInput({ value, onChange }: ProductNumberInp
 }; */
 
 const grey = {
-    50: '#F3F6F9',
-    100: '#E5EAF2',
-    200: '#DAE2ED',
-    300: '#C7D0DD',
-    400: '#B0B8C4',
-    500: '#9DA8B7',
-    600: '#6B7A90',
-    700: '#434D5B',
-    800: '#303740',
-    900: '#1C2025',
+  50: '#F3F6F9',
+  100: '#E5EAF2',
+  200: '#DAE2ED',
+  300: '#C7D0DD',
+  400: '#B0B8C4',
+  500: '#9DA8B7',
+  600: '#6B7A90',
+  700: '#434D5B',
+  800: '#303740',
+  900: '#1C2025',
 };
 
 const pink = {
-    50: 'rgb(253 242 248)',
-    100: 'rgb(252 231 243)',
-    200: 'rgb(251 207 232)',
-    300: 'rgb(249 168 212)',
-    400: 'rgb(244 114 182)',
-    500: 'rgb(236 72 153)',
-    600: 'rgb(219 39 119)',
-    700: 'rgb(190 24 93)',
-    800: 'rgb(157 23 77)',
-    900: 'rgb(131 24 67)',
+  50: 'rgb(253 242 248)',
+  100: 'rgb(252 231 243)',
+  200: 'rgb(251 207 232)',
+  300: 'rgb(249 168 212)',
+  400: 'rgb(244 114 182)',
+  500: 'rgb(236 72 153)',
+  600: 'rgb(219 39 119)',
+  700: 'rgb(190 24 93)',
+  800: 'rgb(157 23 77)',
+  900: 'rgb(131 24 67)',
 };
 
 const StyledInputRoot = styled('div')(
-    ({ theme }) => `
+  ({ theme }) => `
   font-family: 'IBM Plex Sans', sans-serif;
   font-weight: 400;
   color: ${theme.palette.mode === 'dark' ? grey[300] : grey[500]};
@@ -103,12 +103,11 @@ const StyledInputRoot = styled('div')(
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
-  width: 150px;
 `,
 );
 
 const StyledInput = styled('input')(
-    ({ theme }) => `
+  ({ theme }) => `
   font-size: 0.875rem;
   font-family: inherit;
   font-weight: 400;
@@ -141,7 +140,7 @@ const StyledInput = styled('input')(
 );
 
 const StyledButton = styled('button')(
-    ({ theme }) => `
+  ({ theme }) => `
   font-family: 'IBM Plex Sans', sans-serif;
   font-size: 0.875rem;
   box-sizing: border-box;

@@ -21,7 +21,7 @@ import ControllerMenuItem from './ControllerMenuItem';
 
 export default function HeaderControllerIcon() {
 
-    const { auth, setUserInterface } = useShopContext();
+    const { auth, setUserInterface, toggleDrawer } = useShopContext();
 
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
@@ -81,7 +81,11 @@ export default function HeaderControllerIcon() {
                 <Favorite className='hover:text-primary-500' fontSize="large" />
             </Tooltip>
             <Tooltip className='cursor-pointer' title="Kosaram">
-                <ShoppingCart className='hover:text-primary-500' fontSize="large" sx={{ marginRight: 2 }} />
+                <IconButton onClick={toggleDrawer('right', true)} color="inherit" sx={{ p: 0 }}>
+                    <ShoppingCart
+                        className='hover:text-primary-500'
+                        fontSize="large" />
+                </IconButton>
             </Tooltip>
         </Box>
     )

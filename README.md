@@ -83,9 +83,3 @@ To ensure the high quality of the Albihorgaszbolt Webshop codebase, the followin
 
 7. **Global State Management:**
    - Utilization of React Context API for efficient global state distribution.
-
-## Getting Started
-
-To set up and run the Albihorgaszbolt Webshop locally, follow the instructions in the previous section.
-
-Feel free to contribute, report issues, or provide feedback – we appreciate your involvement in making this e-commerce application a success!

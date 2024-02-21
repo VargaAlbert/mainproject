@@ -6,10 +6,11 @@ import { useShopContext } from '@/services/providers/ShopContext';
 
 import useAxiosPrivate from '@/hooks/useAxiosPrivate';
 import useRefreshToken from "@/hooks/useRefreshToken";
+import { INTER_FACE_KEY } from '@/hooks/useUserInterfaceDisplay'
 
 export default function Users() {
 
-    const { handleChangeUIObj } = useShopContext();
+    const { setUserInterface } = useShopContext();
 
     const [users, setUsers] = useState<userT[]>([]);
     const axiosPrivate = useAxiosPrivate();
@@ -18,7 +19,7 @@ export default function Users() {
     const refresh = useRefreshToken();
 
     const handleLogouth = () => {
-        handleChangeUIObj('loginModal', true);
+        setUserInterface(INTER_FACE_KEY.LOGIN_MODAL, true);
     }
 
     useEffect(() => {

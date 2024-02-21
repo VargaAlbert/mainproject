@@ -1,6 +1,6 @@
 "use client"
 
-import * as React from 'react';
+import React from 'react';
 import { useShopContext } from '@/services/providers/ShopContext';
 
 import Box from '@mui/material/Box';

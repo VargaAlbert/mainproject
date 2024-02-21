@@ -22,7 +22,7 @@ type prop = {
 
 export default function ProductCart({ anchor }: prop) {
 
-    const { userInterfaceDisplay, toggleDrawer, cartItems } = useShopContext();
+    const { cartItems } = useShopContext();
 
     return (
         <Box

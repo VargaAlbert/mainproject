@@ -3,6 +3,7 @@ import { useRef, useState, useEffect } from "react";
 import { useShopContext } from "@/services/providers/ShopContext";
 import axios from "@/services/api/axiosConfig";
 import { useRouter } from 'next/navigation';
+import { INTER_FACE_KEY } from '@/hooks/useUserInterfaceDisplay'
 
 import {
     Check,
@@ -22,7 +23,7 @@ type ResponseType = {
 }
 
 export default function RegistrationForm() {
-    const { handleChangeUIObj } = useShopContext();
+    const { setUserInterface } = useShopContext();
 
     const userRef = useRef<HTMLInputElement | null>(null);
     const errRef = useRef<HTMLParagraphElement | null>(null);
@@ -40,7 +41,7 @@ export default function RegistrationForm() {
     const [matchFocus, setMatchFocus] = useState(false);
 
     const [errMsg, setErrMsg] = useState('');
-    const [success, setSuccess] = useState(true);
+    const [success, setSuccess] = useState(false);
 
     const router = useRouter();
 
@@ -81,9 +82,6 @@ export default function RegistrationForm() {
                     withCredentials: true
                 }
             );
-            console.log(response?.data);
-            console.log(response?.accessToken);
-            console.log(JSON.stringify(response))
             setSuccess(true);
             setUser('');
             setPwd('');
@@ -104,7 +102,7 @@ export default function RegistrationForm() {
     }
 
     const handleOpenLoginMenu = () => {
-        handleChangeUIObj('loginModal', true)
+        setUserInterface(INTER_FACE_KEY.LOGIN_MODAL, true)
         router.push('/', undefined);
     }
 

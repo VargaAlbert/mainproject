@@ -57,17 +57,6 @@ export default function ProductNumberInput({ value, onChange }: ProductNumberInp
     defaultValue={1} />;
 }
 
-/* const blue = {
-    100: '#daecff',
-    200: '#b6daff',
-    300: '#66b2ff',
-    400: '#3399ff',
-    500: '#007fff',
-    600: '#0072e5',
-    700: '#0059B2',
-    800: '#004c99',
-}; */
-
 const grey = {
   50: '#F3F6F9',
   100: '#E5EAF2',

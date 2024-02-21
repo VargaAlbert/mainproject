@@ -4,17 +4,17 @@ import { useRef, useState, useEffect, FormEvent } from 'react';
 import { useShopContext } from "@/services/providers/ShopContext";
 import { useRouter } from 'next/navigation';
 import axios, { LOGIN_URL } from '@/services/api/axiosConfig';
-import { Button } from '@mui/material/';
+import Link from 'next/link';
 
+import { INTER_FACE_KEY } from '@/hooks/useUserInterfaceDisplay'
 import useInput from '@/hooks/useInput';
 import useToggle from '@/hooks/useToggle';
 
 import LinkButton from '@/components/UI/LinkButton';
-import Link from 'next/link';
 
 export default function LoginForm() {
 
-    const { auth, setAuth, handleChangeUIObj } = useShopContext();
+    const { auth, setAuth, setUserInterface } = useShopContext();
 
     const [user, resetUser, userAttribs] = useInput('user', '')
     const [pwd, setPwd] = useState('');
@@ -76,7 +76,7 @@ export default function LoginForm() {
     }
 
     const handleCloseUserMenu = () => {
-        handleChangeUIObj('loginModal', false);
+        setUserInterface(INTER_FACE_KEY.LOGIN_MODAL, false)
     }
 
     return (

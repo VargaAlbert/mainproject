@@ -27,7 +27,6 @@ export default function ProductPageCard({
 
     const { cartItems, productAddCart } = useShopContext();
 
-
     return (
         <Card className='max-w-sm h-full flex flex-col justify-between transform hover:scale-105 transition-transform duration-300 ease-in-out'>
             <CardMedia

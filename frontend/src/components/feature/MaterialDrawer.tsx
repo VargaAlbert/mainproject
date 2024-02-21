@@ -1,23 +1,9 @@
 "use client"
 
-import React, { Children } from 'react';
+import React from 'react';
 import { useShopContext } from '@/services/providers/ShopContext';
 
-import {
-    Box,
-    Drawer,
-    Button,
-    List,
-    Divider,
-    ListItem,
-    ListItemButton,
-    ListItemIcon,
-    ListItemText
-} from '@mui/material';
-
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-
+import { Drawer } from '@mui/material';
 
 export default function TemporaryDrawer({ children }: {
     children: React.ReactNode;
@@ -26,7 +12,7 @@ export default function TemporaryDrawer({ children }: {
 
     return (
         <div>
-            {(['left', 'right', 'top', 'bottom'] as const).map((anchor) => (
+            {(['left', 'right'] as const).map((anchor) => (
                 <React.Fragment key={anchor}>
                     <Drawer
                         anchor={anchor}

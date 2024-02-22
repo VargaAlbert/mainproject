@@ -3,17 +3,23 @@
 import React from 'react';
 import { useShopContext } from '@/services/providers/ShopContext';
 
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
+import {
+    Box,
+    Card,
+    CardContent,
+    CardMedia,
+    Tooltip,
+    Typography,
+    IconButton,
+} from '@mui/material';
 
-import Typography from '@mui/material/Typography';
+import DeleteIcon from '@mui/icons-material/Delete';
+
 import { formatPrice } from '@/utils/formatPrice';
 import ProductNumberInput from '@/components/UI/product/ProductNumberInput'
 export default function ProductCartCard({ id, quantity }: CartItemT) {
 
-    const { data, productAddCart } = useShopContext();
+    const { data, productAddCart, removeFromCart } = useShopContext();
 
     const item: productT | undefined = data.find((item) => item.productid === id);
 
@@ -37,6 +43,10 @@ export default function ProductCartCard({ id, quantity }: CartItemT) {
 
     const quantityPrice = quantity * price
 
+    const deleteIlem = () => {
+        removeFromCart(id)
+    }
+
     return (
         <Card className="flex h-42 m-3">
             <CardMedia
@@ -48,8 +58,16 @@ export default function ProductCartCard({ id, quantity }: CartItemT) {
             <Box className="flex flex-col w-3/5">
 
                 <CardContent className="flex-1 ">
-                    <Typography component="div">
-                        <p className='text-xs'>{product}</p>
+                    <Typography component="div" className='flex justify-between'>
+                        <Box>
+                            <p className='text-xs'>{product}</p>
+                        </Box>
+                        <Tooltip title="Törlés">
+                            <IconButton onClick={deleteIlem} color="inherit" size="medium" className="p-0 h-8">
+                                <DeleteIcon fontSize="medium" className='hover:text-primary-500' />
+                            </IconButton>
+                        </Tooltip>
+
                     </Typography>
 
                     <Typography

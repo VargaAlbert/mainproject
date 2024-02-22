@@ -173,3 +173,12 @@
 20240221	21:35:58	8884f932-8406-4ce4-b3c3-a9385b822b67	GET	http://localhost:3000	/products
 20240221	21:36:54	a71e3ce6-0273-43c0-936f-96b9ab9a49e0	OPTIONS	http://localhost:3000	/auth
 20240221	21:36:54	0b655b8a-fd98-40b7-839d-57b60b4755d4	POST	http://localhost:3000	/auth
+20240221	22:18:43	12d85671-134d-4d48-8947-7163b8a54ea6	GET	http://localhost:3000	/refresh
+20240221	22:18:43	a3993bfd-d6a2-48cd-8e66-104bdf516b80	GET	http://localhost:3000	/products
+20240222	18:16:23	227bd4ea-ce28-435e-91e9-c23cfe06ad8e	GET	http://localhost:3000	/refresh
+20240222	18:16:23	6e71049b-20d0-4281-876b-e3f0aaa73750	GET	http://localhost:3000	/products
+20240222	18:30:33	6ca6a179-8d7e-4d4c-ac99-b7308b0e68d0	GET	http://localhost:3000	/refresh
+20240222	18:30:33	23b64e8c-3691-4183-9569-47345ad06dc3	GET	http://localhost:3000	/products
+20240222	18:31:47	57cf9788-9f95-4649-9021-c58412ee666c	GET	http://localhost:3000	/refresh
+20240222	18:31:47	fce7b291-f9ae-4aa2-89bf-b605e0cc202c	GET	http://localhost:3000	/products
+20240222	19:06:44	06c49067-cb27-41a3-bae5-3be78ca21ffd	GET	http://localhost:3000	/logout

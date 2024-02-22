@@ -14,7 +14,7 @@ const sampleProduct: productT = {
 };
 
 test('renders ProductPageCard with correct product details', () => {
-    render(<ProductPageCard item={sampleProduct} />);
+    render(<ProductPageCard {...sampleProduct} />);
 
     // Check that the correct items appear on the card
     const productName = screen.getByText(sampleProduct.product);

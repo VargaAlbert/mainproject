@@ -75,7 +75,6 @@ describe('useProductAddCart', () => {
     test.each(Array.from({ length: 10 }, (_, index) => index + START_TEST_TEST_QUANTITY))(
         'should update quantities in the cart productAddCart(quantity, "product", false!)',
         (iterationIndex) => {
-            console.log(iterationIndex)
             const TestComponent = () => {
                 const { productAddCart, findQuantityById } = useProductAddCart();
 

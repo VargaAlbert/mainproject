@@ -28,9 +28,10 @@ export interface ShopContextProps {
     setAuth: React.Dispatch<React.SetStateAction<authT>>;
     setFilters: React.Dispatch<React.SetStateAction<filterT>>;
 
+
     productAddCart: (quantityOfProduct: number, id: string, isSelfIncrease: boolean) => void;
     setUserInterface: (key: string, value: boolean) => void;
-
+    removeFromCart: (id: string) => void;
     toggleDrawer: (anchor: Anchor, open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => void;
 
     cartItems: CartItemT[];
@@ -63,11 +64,10 @@ export const ShopProvider: React.FC<ShopProviderProps> = ({
     const [persist, setPersist] = useLocalStorage<boolean>("persist", false);
 
     const { userInterfaceDisplay, setUserInterface, toggleDrawer } = useUserInterfaceDisplay();
-    console.log(userInterfaceDisplay);
 
     const { data, loading, error } = useFetchData();
 
-    const { cartItems, productAddCart } = useProductAddCart();
+    const { cartItems, productAddCart, removeFromCart } = useProductAddCart();
 
     const products = useProductsFilter(data, filters);
 
@@ -86,6 +86,7 @@ export const ShopProvider: React.FC<ShopProviderProps> = ({
         error,
         cartItems,
         productAddCart,
+        removeFromCart,
         toggleDrawer,
     };
 

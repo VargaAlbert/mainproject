@@ -3,6 +3,7 @@
 import React, { useEffect } from 'react'
 import { notFound } from 'next/navigation'
 import { useShopContext } from "@/services/providers/ShopContext";
+import { LinearProgress } from '@mui/material';
 
 import ProductPageCard from '@/components/UI/product/ProductPageCard';
 
@@ -30,11 +31,12 @@ export default function Product({ category }: propT) {
     }, [category, setFilters, products.length]);
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <LinearProgress color="inherit" />;
     }
 
     if (error) {
-        return <div>Error: {error}</div>;
+        return <div>Error: {error}</div >
+
     }
 
     return (

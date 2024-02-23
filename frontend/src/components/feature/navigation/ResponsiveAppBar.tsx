@@ -9,7 +9,7 @@ import {
     PRODUCT_CATEGORY,
     processString
 } from '@/utils/category';
-import HeaderControllerIcon from '@/components/UI/header/HeaderControllerIcon';
+import HeaderControllerIcon from '@/components/UI/navigation/HeaderControllerIcon';
 import {
     AppBar,
     Box,
@@ -23,8 +23,6 @@ import {
 } from '@mui/material/';
 import MenuIcon from '@mui/icons-material/Menu';
 import logo from '@/assets/logo.png'
-
-
 
 export default function ResponsiveAppBar() {
 

@@ -57,11 +57,11 @@ export default function ProductCartCard({ id, quantity }: CartItemT) {
             />
             <Box className="flex flex-col w-3/5">
 
-                <CardContent className="flex-1 ">
+                <CardContent className="flex-1">
                     <Typography component="div" className='flex justify-between'>
-                        <Box>
+                        <Typography>
                             <p className='text-xs'>{product}</p>
-                        </Box>
+                        </Typography>
                         <Tooltip title="Törlés">
                             <IconButton onClick={deleteIlem} color="inherit" size="medium" className="p-0 h-8">
                                 <DeleteIcon fontSize="medium" className='hover:text-primary-500' />
@@ -75,12 +75,12 @@ export default function ProductCartCard({ id, quantity }: CartItemT) {
                         component="div"
                         className='flex justify-between'
                     >
-                        <Box color="text.secondary">
+                        <Typography color="text.secondary">
                             {formatPrice(price)} Ft
-                        </Box>
-                        <Box>
+                        </Typography>
+                        <Typography>
                             {formatPrice(quantityPrice)} Ft
-                        </Box>
+                        </Typography>
                     </Typography>
 
                 </CardContent>

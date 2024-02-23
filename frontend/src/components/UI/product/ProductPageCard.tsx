@@ -34,12 +34,13 @@ export default function ProductPageCard({
                 alt={`img-${productid}`}
                 height="140"
                 image={img}
+                id="carouselImg"
             />
             <CardContent>
-                <Typography gutterBottom variant="h6" component="div">
+                <Typography gutterBottom variant="h6" color="text.primary" component="div">
                     {product}
                 </Typography>
-                <Typography variant="h4" className="text-white">
+                <Typography variant="h4" color="text.primary">
                     {formatPrice(price)} Ft
                 </Typography>
             </CardContent>

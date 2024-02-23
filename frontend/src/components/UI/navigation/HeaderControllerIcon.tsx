@@ -72,10 +72,14 @@ export default function HeaderControllerIcon() {
                     </Menu>
                 </Box>
             ) : (
-                <Person
-                    className='hover:text-primary-500'
-                    fontSize="large"
-                    onClick={handleOpenLoginMenu} />
+                <Tooltip className='cursor-pointer' title="Bejelentkezés">
+                    <IconButton size="large" color="inherit" className="p-0">
+                        <Person
+                            className='hover:text-primary-500'
+                            fontSize="large"
+                            onClick={handleOpenLoginMenu} />
+                    </IconButton>
+                </Tooltip>
             )}
             <Tooltip className='cursor-pointer' title="Kedvenceim">
                 <IconButton size="large" color="inherit" className="p-0">

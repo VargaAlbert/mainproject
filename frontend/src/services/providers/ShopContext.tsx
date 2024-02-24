@@ -18,6 +18,7 @@ import useFetchData from "@/hooks/useFetchProducts";
 import useProductsFilter from "@/hooks/useProductsFilter";
 import useUserInterfaceDisplay from "@/hooks/useUserInterfaceDisplay";
 import useProductAddCart from "@/hooks/useProductsAddCart";
+import usePagination from "@/hooks/usePagination";
 
 type ShopProviderProps = {
     children: ReactNode;
@@ -33,6 +34,20 @@ export interface ShopContextProps {
     setUserInterface: (key: string, value: boolean) => void;
     removeFromCart: (id: string) => void;
     toggleDrawer: (anchor: Anchor, open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => void;
+
+    /* ---------- */
+    page: number
+    currentPage: number;
+    maxPage: number;
+    count: number;
+    nextPage: () => void;
+    prevPage: () => void;
+    jumpPage: (page: number) => void;
+    currentData: () => productT[];
+    numberOfPage: () => number;
+    handleChange: (event: React.ChangeEvent<unknown>, page: number) => void
+    /* ---------- */
+
 
     cartItems: CartItemT[];
     data: productT[];
@@ -71,6 +86,8 @@ export const ShopProvider: React.FC<ShopProviderProps> = ({
 
     const products = useProductsFilter(data, filters);
 
+    const { currentPage, maxPage, page, count, nextPage, prevPage, jumpPage, currentData, numberOfPage, handleChange } = usePagination(products, 6);
+
     const contextValue: ShopContextProps = {
         setUserInterface,
         userInterfaceDisplay,
@@ -88,6 +105,18 @@ export const ShopProvider: React.FC<ShopProviderProps> = ({
         productAddCart,
         removeFromCart,
         toggleDrawer,
+        /* ------ */
+        currentPage,
+        maxPage,
+        page,
+        count,
+        nextPage,
+        prevPage,
+        jumpPage,
+        currentData,
+        numberOfPage,
+        handleChange,
+        /* ------ */
     };
 
     return (

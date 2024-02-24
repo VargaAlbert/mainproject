@@ -9,8 +9,8 @@ type paramsT = {
 
 export default function ProductsPage({ params }: paramsT) {
     return (
-        <section className="ProductPageContainer">
-            <Product category={params.category} />
-        </section>
+
+        <Product category={params.category} />
+
     )
 }

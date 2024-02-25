@@ -18,14 +18,14 @@ import useFetchData from "@/hooks/useFetchProducts";
 import useProductsFilter from "@/hooks/useProductsFilter";
 import useUserInterfaceDisplay from "@/hooks/useUserInterfaceDisplay";
 import useProductAddCart from "@/hooks/useProductsAddCart";
-import usePagination, { usePaginationInterface } from "@/hooks/usePagination";
+import usePagination, { UsePaginationInterface } from "@/hooks/usePagination";
 
 type ShopProviderProps = {
     children: ReactNode;
 };
 
 export interface ShopContextProps
-    extends usePaginationInterface {
+    extends UsePaginationInterface {
     setPersist: React.Dispatch<React.SetStateAction<boolean>>;
     setAuth: React.Dispatch<React.SetStateAction<authT>>;
     setFilters: React.Dispatch<React.SetStateAction<filterT>>;

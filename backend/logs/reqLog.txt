@@ -242,3 +242,13 @@
 20240224	20:56:26	2ffc3028-db61-46c1-885e-03c0f8c3ca2f	GET	http://localhost:3000	/products
 20240224	20:59:26	1afc3968-e53c-4377-aa08-9ea8b42b1e0a	GET	http://localhost:3000	/refresh
 20240224	20:59:26	c7c99843-6977-4895-8fe4-fc397b40be20	GET	http://localhost:3000	/products
+20240225	14:28:19	a4c60060-ddd9-4704-ab79-b99ba0c32abc	GET	http://localhost:3000	/refresh
+20240225	14:28:19	c97958e9-4707-42a8-b1b8-172e9fa228ba	GET	http://localhost:3000	/products
+20240225	14:29:03	381c7a63-2585-44b4-b332-f5ecec70e043	GET	http://localhost:3000	/refresh
+20240225	14:29:03	2c2cce2b-7abb-47f8-b9ac-dd15adb195dd	GET	http://localhost:3000	/products
+20240225	14:31:19	be0ea4d9-4b55-4134-97f5-ca8d02fb7c08	GET	http://localhost:3000	/refresh
+20240225	14:31:19	2848e376-5855-487a-a450-2a9281227034	GET	http://localhost:3000	/products
+20240225	14:32:10	bcd7ada6-dcaf-4588-bff7-dca11c7f9f81	GET	http://localhost:3000	/refresh
+20240225	14:32:10	b6aeaf03-fc94-4cee-92d2-8b2f0b71bf4e	GET	http://localhost:3000	/products
+20240225	14:32:57	64781d60-8401-438a-95f3-c4f403bd60d3	GET	http://localhost:3000	/refresh
+20240225	14:32:57	630b7c96-efad-45a6-9dcf-371224cdb236	GET	http://localhost:3000	/products

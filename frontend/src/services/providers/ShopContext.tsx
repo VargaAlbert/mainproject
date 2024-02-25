@@ -14,9 +14,10 @@ import {
     initAuth,
     initFilter
 } from "../initConfig";
-import useFetchData from "@/hooks/useFetchProducts";
-import useUserInterfaceDisplay from "@/hooks/useUserInterfaceDisplay";
-import useProductAddCart from "@/hooks/useProductsAddCart";
+
+import useUserInterfaceDisplay, { UseUserInterfaceDisplayInterface } from "@/hooks/useUserInterfaceDisplay";
+import useFetchData, { UseFetchData } from "@/hooks/useFetchProducts";
+import useProductAddCart, { UseProductAddCart } from "@/hooks/useProductsAddCart";
 import useProductsFilter, { UseProductsFilterInterface } from "@/hooks/useProductsFilter";
 import usePagination, { UsePaginationInterface } from "@/hooks/usePagination";
 
@@ -27,26 +28,15 @@ type ShopProviderProps = {
 export interface ShopContextProps
     extends
     UsePaginationInterface,
-    UseProductsFilterInterface {
+    UseProductsFilterInterface,
+    UseProductAddCart,
+    UseFetchData,
+    UseUserInterfaceDisplayInterface {
+
     setPersist: React.Dispatch<React.SetStateAction<boolean>>;
     setAuth: React.Dispatch<React.SetStateAction<authT>>;
-
-
-    productAddCart: (quantityOfProduct: number, id: string, isSelfIncrease: boolean) => void;
-    setUserInterface: (key: string, value: boolean) => void;
-    removeFromCart: (id: string) => void;
-    toggleDrawer: (anchor: Anchor, open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => void;
-
-    cartItems: CartItemT[];
-    data: productT[];
-
-    userInterfaceDisplay: uiObjT;
     auth: authT;
-
-    error: string | null;
-
     persist: boolean;
-    loading: boolean;
 };
 
 export const ShopContext = createContext({} as ShopContextProps)
@@ -70,28 +60,26 @@ export const ShopProvider: React.FC<ShopProviderProps> = ({
     const { cartItems, productAddCart, removeFromCart } = useProductAddCart();
 
     const { filteredProducts, filters, setFilters } = useProductsFilter(data);
+
     const { page, maxPage, currentPageData, handleChangePage } = usePagination(filteredProducts, 6);
 
     const contextValue: ShopContextProps = {
-        setUserInterface,
-        userInterfaceDisplay,
+
         setAuth,
         auth,
         persist,
         setPersist,
 
 
-        data,
-        loading,
-        error,
-        cartItems,
-        productAddCart,
-        removeFromCart,
-        toggleDrawer,
-
+        /* --useUserInterfaceDisplay-- */
+        userInterfaceDisplay, setUserInterface, toggleDrawer,
         /* ----- */
+        data, loading, error,
+        /* --useProductAddCart-- */
+        cartItems, productAddCart, removeFromCart,
+        /* --useProductsFilter-- */
         filteredProducts, filters, setFilters,
-        /* ------ */
+        /* --usePagination-- */
         page, maxPage, currentPageData, handleChangePage,
         /* ------ */
     };

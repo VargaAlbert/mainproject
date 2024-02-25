@@ -1,10 +1,9 @@
+import { useState } from "react";
+
 /**
  * @fileOverview Custom React hook for managing UI states.
  * @module useUserInterfaceDisplay
  */
-
-
-import { useState } from "react";
 
 type Anchor = 'top' | 'left' | 'bottom' | 'right';
 
@@ -15,6 +14,12 @@ type DrawerState = {
 type uiObjT = {
     LOGIN_MODAL: boolean;
     DRAWER: DrawerState;
+}
+
+export interface UseUserInterfaceDisplayInterface {
+    setUserInterface: (key: string, value: boolean) => void;
+    toggleDrawer: (anchor: Anchor, open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => void;
+    userInterfaceDisplay: uiObjT;
 }
 
 /**
@@ -34,8 +39,6 @@ export const initUiObj: uiObjT = {
         right: false,
     },
 }
-
-
 
 /**
  * Hook for managing UI states.

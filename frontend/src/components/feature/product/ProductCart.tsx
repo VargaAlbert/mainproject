@@ -35,11 +35,11 @@ export default function ProductCart({ anchor }: prop) {
                     KOSARAM
                 </Typography>
                 <Tooltip className='cursor-pointer' title="Bezárás">
-                    <IconButton size="large" color="inherit" className="m-2 p-0">
+                    <IconButton onClick={toggleDrawer(anchor, false)} size="large" color="inherit" className="m-2 p-0">
                         <Close
                             className='hover:text-primary-500'
                             fontSize="large"
-                            onClick={toggleDrawer(anchor, false)} />
+                        />
                     </IconButton>
                 </Tooltip>
             </Box>

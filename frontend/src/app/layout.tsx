@@ -8,6 +8,8 @@ import LoginModal from "@/components/feature/authentication/LoginModal";
 import PersistLogin from "@/components/feature/authentication/PersitstLogin";
 import MaterialDrawer from '@/components/feature/navigation/MaterialDrawer'
 import ProductCart from "@/components/feature/product/ProductCart";
+import AppFooter from "@/components/feature/footer/AppFooter";
+
 import "../style/globals.scss"
 
 export const metadata: Metadata = {
@@ -34,6 +36,7 @@ export default function RootLayout({
                 <ProductCart anchor={"right"} />
               </MaterialDrawer>
             </PersistLogin>
+            <AppFooter />
           </ShopProvider>
         </ThemeProvider>
       </body>

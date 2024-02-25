@@ -15,9 +15,9 @@ import {
     initFilter
 } from "../initConfig";
 import useFetchData from "@/hooks/useFetchProducts";
-import useProductsFilter from "@/hooks/useProductsFilter";
 import useUserInterfaceDisplay from "@/hooks/useUserInterfaceDisplay";
 import useProductAddCart from "@/hooks/useProductsAddCart";
+import useProductsFilter, { UseProductsFilterInterface } from "@/hooks/useProductsFilter";
 import usePagination, { UsePaginationInterface } from "@/hooks/usePagination";
 
 type ShopProviderProps = {
@@ -25,10 +25,11 @@ type ShopProviderProps = {
 };
 
 export interface ShopContextProps
-    extends UsePaginationInterface {
+    extends
+    UsePaginationInterface,
+    UseProductsFilterInterface {
     setPersist: React.Dispatch<React.SetStateAction<boolean>>;
     setAuth: React.Dispatch<React.SetStateAction<authT>>;
-    setFilters: React.Dispatch<React.SetStateAction<filterT>>;
 
 
     productAddCart: (quantityOfProduct: number, id: string, isSelfIncrease: boolean) => void;
@@ -38,9 +39,7 @@ export interface ShopContextProps
 
     cartItems: CartItemT[];
     data: productT[];
-    products: productT[];
 
-    filters: filterT;
     userInterfaceDisplay: uiObjT;
     auth: authT;
 
@@ -61,7 +60,6 @@ export const ShopProvider: React.FC<ShopProviderProps> = ({
 }) => {
 
     const [auth, setAuth] = useState<authT>(initAuth);
-    const [filters, setFilters] = useState<filterT>(initFilter)
 
     const [persist, setPersist] = useLocalStorage<boolean>("persist", false);
 
@@ -71,9 +69,8 @@ export const ShopProvider: React.FC<ShopProviderProps> = ({
 
     const { cartItems, productAddCart, removeFromCart } = useProductAddCart();
 
-    const products = useProductsFilter(data, filters);
-
-    const { page, maxPage, currentPageData, handleChangePage } = usePagination(products, 6);
+    const { filteredProducts, filters, setFilters } = useProductsFilter(data);
+    const { page, maxPage, currentPageData, handleChangePage } = usePagination(filteredProducts, 6);
 
     const contextValue: ShopContextProps = {
         setUserInterface,
@@ -82,9 +79,8 @@ export const ShopProvider: React.FC<ShopProviderProps> = ({
         auth,
         persist,
         setPersist,
-        filters,
-        setFilters,
-        products,
+
+
         data,
         loading,
         error,
@@ -92,11 +88,11 @@ export const ShopProvider: React.FC<ShopProviderProps> = ({
         productAddCart,
         removeFromCart,
         toggleDrawer,
+
+        /* ----- */
+        filteredProducts, filters, setFilters,
         /* ------ */
-        page,
-        maxPage,
-        currentPageData,
-        handleChangePage,
+        page, maxPage, currentPageData, handleChangePage,
         /* ------ */
     };
 

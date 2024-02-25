@@ -15,7 +15,7 @@ export default function Product({ category }: propT) {
 
     const {
         setFilters,
-        products,
+        filteredProducts,
         loading,
         error,
         currentPageData
@@ -29,7 +29,7 @@ export default function Product({ category }: propT) {
         /*         if (products.length === 0) {
                     notFound()
                 } */
-    }, [category, setFilters, products.length]);
+    }, [category, setFilters, filteredProducts.length]);
 
     if (loading) {
         return <LinearProgress color="inherit" />;

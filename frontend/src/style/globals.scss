@@ -55,10 +55,6 @@ input:-webkit-autofill:active {
   @apply text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-primary-600 hover:bg-primary-700 focus:ring-primary-800;
 }
 
-.ProductPageContainer {
-  @apply mx-auto max-w-screen-2xl;
-}
-
 @media (min-width: 1024px) {
   .importantCarouselWidth {
     width: 50% !important;

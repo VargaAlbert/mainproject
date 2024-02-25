@@ -10,7 +10,7 @@ import { INTER_FACE_KEY } from '@/hooks/useUserInterfaceDisplay'
 import useInput from '@/hooks/useInput';
 import useToggle from '@/hooks/useToggle';
 
-import LinkButton from '@/components/UI/LinkButton';
+import LinkButton from '@/components/UI/navigation/LinkButton';
 
 export default function LoginForm() {
 

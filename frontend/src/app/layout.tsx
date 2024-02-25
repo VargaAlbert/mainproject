@@ -6,7 +6,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import Header from "@/components/feature/navigation/ResponsiveAppBar";
 import LoginModal from "@/components/feature/authentication/LoginModal";
 import PersistLogin from "@/components/feature/authentication/PersitstLogin";
-import MaterialDrawer from '@/components/feature/MaterialDrawer'
+import MaterialDrawer from '@/components/feature/navigation/MaterialDrawer'
 import ProductCart from "@/components/feature/product/ProductCart";
 import "../style/globals.scss"
 

@@ -14,8 +14,8 @@ type propT = {
 export default function Product({ category }: propT) {
 
     const {
-        setFilters,
         filteredProducts,
+        setFilters,
         loading,
         error,
         currentPageData,
@@ -28,9 +28,7 @@ export default function Product({ category }: propT) {
             category: category
         }));
         setPageOfNumber(1);
-        /*         if (products.length === 0) {
-                    notFound()
-                } */
+
     }, [category, setFilters, filteredProducts.length]);
 
     if (loading) {
@@ -39,7 +37,6 @@ export default function Product({ category }: propT) {
 
     if (error) {
         return <div>Error: {error}</div >
-
     }
 
     return (

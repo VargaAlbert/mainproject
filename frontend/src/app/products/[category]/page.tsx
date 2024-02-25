@@ -8,6 +8,7 @@ type paramsT = {
 }
 
 export default function ProductsPage({ params }: paramsT) {
+
     return (
         <Product category={params.category} />
     )

@@ -24,7 +24,6 @@ const PersistLogin: React.FC<PersistLoginProps> = ({ children }) => {
 
     useEffect(() => {
         const currentPath = window.location.pathname;
-        console.log("aktuális ut", currentPath)
         const verifyRefreshToken = async () => {
             try {
                 await refresh();

@@ -8,14 +8,11 @@ import { useState } from "react";
 
 // Hook that facilitates pagination functionality
 export interface UsePaginationInterface {
-  // Current page number
   page: number;
-  // Maximum page number
   maxPage: number;
-  // Function to retrieve data for the current page
   currentPageData: () => productT[];
-  // Handling page change
   handleChangePage: (event: React.ChangeEvent<unknown>, page: number) => void;
+  setPageOfNumber: (page: number) => void;
 }
 
 /**
@@ -49,15 +46,25 @@ const usePagination = (products: productT[], itemsPerPage: number): UsePaginatio
   }
 
   /**
+   * Set page of number.
+   * @param {number} page - The new page number.
+   * @public
+   */
+  const setPageOfNumber = (page : number) => {
+    setPage(page);
+    jumpPage(page);
+  }
+
+  /**
    * Handles page change.
    * @param {React.ChangeEvent<unknown>} event - The event object.
    * @param {number} page - The new page number.
    * @public
    */
   const handleChangePage = (event: React.ChangeEvent<unknown>, page: number) => {
-    setPage(page);
-    jumpPage(page);
+    setPageOfNumber(page)
   };
+
 
   /**
    * Handles page jump.
@@ -70,7 +77,7 @@ const usePagination = (products: productT[], itemsPerPage: number): UsePaginatio
   }
 
   // Return an object containing pagination state and operations
-  return { page, maxPage, currentPageData, handleChangePage };
+  return { page, maxPage, currentPageData, handleChangePage, setPageOfNumber };
 }
 
 export default usePagination;

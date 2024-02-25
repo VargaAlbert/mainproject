@@ -18,7 +18,8 @@ export default function Product({ category }: propT) {
         filteredProducts,
         loading,
         error,
-        currentPageData
+        currentPageData,
+        setPageOfNumber
     } = useShopContext();
 
     useEffect(() => {
@@ -26,6 +27,7 @@ export default function Product({ category }: propT) {
             ...prevFilters,
             category: category
         }));
+        setPageOfNumber(1);
         /*         if (products.length === 0) {
                     notFound()
                 } */

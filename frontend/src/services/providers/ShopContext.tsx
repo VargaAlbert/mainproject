@@ -50,7 +50,6 @@ export const ShopProvider: React.FC<ShopProviderProps> = ({
 }) => {
 
     const [auth, setAuth] = useState<authT>(initAuth);
-
     const [persist, setPersist] = useLocalStorage<boolean>("persist", false);
 
     const { userInterfaceDisplay, setUserInterface, toggleDrawer } = useUserInterfaceDisplay();
@@ -61,7 +60,7 @@ export const ShopProvider: React.FC<ShopProviderProps> = ({
 
     const { filteredProducts, filters, setFilters } = useProductsFilter(data);
 
-    const { page, maxPage, currentPageData, handleChangePage } = usePagination(filteredProducts, 6);
+    const { page, maxPage, currentPageData, handleChangePage, setPageOfNumber } = usePagination(filteredProducts, 6);
 
     const contextValue: ShopContextProps = {
 
@@ -80,7 +79,7 @@ export const ShopProvider: React.FC<ShopProviderProps> = ({
         /* --useProductsFilter-- */
         filteredProducts, filters, setFilters,
         /* --usePagination-- */
-        page, maxPage, currentPageData, handleChangePage,
+        page, maxPage, currentPageData, handleChangePage, setPageOfNumber
         /* ------ */
     };
 

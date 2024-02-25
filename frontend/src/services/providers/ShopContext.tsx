@@ -18,13 +18,14 @@ import useFetchData from "@/hooks/useFetchProducts";
 import useProductsFilter from "@/hooks/useProductsFilter";
 import useUserInterfaceDisplay from "@/hooks/useUserInterfaceDisplay";
 import useProductAddCart from "@/hooks/useProductsAddCart";
-import usePagination from "@/hooks/usePagination";
+import usePagination, { usePaginationInterface } from "@/hooks/usePagination";
 
 type ShopProviderProps = {
     children: ReactNode;
 };
 
-export interface ShopContextProps {
+export interface ShopContextProps
+    extends usePaginationInterface {
     setPersist: React.Dispatch<React.SetStateAction<boolean>>;
     setAuth: React.Dispatch<React.SetStateAction<authT>>;
     setFilters: React.Dispatch<React.SetStateAction<filterT>>;
@@ -34,20 +35,6 @@ export interface ShopContextProps {
     setUserInterface: (key: string, value: boolean) => void;
     removeFromCart: (id: string) => void;
     toggleDrawer: (anchor: Anchor, open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => void;
-
-    /* ---------- */
-    page: number
-    currentPage: number;
-    maxPage: number;
-    count: number;
-    nextPage: () => void;
-    prevPage: () => void;
-    jumpPage: (page: number) => void;
-    currentData: () => productT[];
-    numberOfPage: () => number;
-    handleChange: (event: React.ChangeEvent<unknown>, page: number) => void
-    /* ---------- */
-
 
     cartItems: CartItemT[];
     data: productT[];
@@ -86,7 +73,7 @@ export const ShopProvider: React.FC<ShopProviderProps> = ({
 
     const products = useProductsFilter(data, filters);
 
-    const { currentPage, maxPage, page, count, nextPage, prevPage, jumpPage, currentData, numberOfPage, handleChange } = usePagination(products, 6);
+    const { page, maxPage, currentPageData, handleChangePage } = usePagination(products, 6);
 
     const contextValue: ShopContextProps = {
         setUserInterface,
@@ -106,16 +93,10 @@ export const ShopProvider: React.FC<ShopProviderProps> = ({
         removeFromCart,
         toggleDrawer,
         /* ------ */
-        currentPage,
-        maxPage,
         page,
-        count,
-        nextPage,
-        prevPage,
-        jumpPage,
-        currentData,
-        numberOfPage,
-        handleChange,
+        maxPage,
+        currentPageData,
+        handleChangePage,
         /* ------ */
     };
 

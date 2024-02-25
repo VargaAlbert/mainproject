@@ -18,7 +18,7 @@ export default function Product({ category }: propT) {
         products,
         loading,
         error,
-        currentData
+        currentPageData
     } = useShopContext();
 
     useEffect(() => {
@@ -42,7 +42,7 @@ export default function Product({ category }: propT) {
 
     return (
         <section className='w-full p-8 grid grid-cols-1 gap-8 justify-center items-center justify-items-center md:grid-cols-2 lg:grid-cols-3 lg:gap-12 2xl:grid-cols-4'>
-            {currentData().map((item) => (
+            {currentPageData().map((item) => (
                 <ProductPageCard key={item.productid} {...item} />
             ))}
         </section>

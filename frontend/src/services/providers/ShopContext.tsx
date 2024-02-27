@@ -72,7 +72,7 @@ export const ShopProvider: React.FC<ShopProviderProps> = ({
 
         /* --useUserInterfaceDisplay-- */
         userInterfaceDisplay, setUserInterface, toggleDrawer,
-        /* ----- */
+        /* --useFetchData-- */
         data, loading, error,
         /* --useProductAddCart-- */
         cartItems, productAddCart, removeFromCart,

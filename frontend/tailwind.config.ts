@@ -28,8 +28,12 @@ const config: Config = {
         "900":"rgb(131 24 67)",
         "950":"rgb(80 7 36)"
         },
+        text: {
+          "primary": "rgb(255, 255, 255)",
+          "secondary": "rgb(102, 102, 102);",
+        },
         background: {
-          "primary": "rgb(0,0,0)",
+          "primary": "rgb(0, 0, 0)",
           "secondary": "rgb(39, 39, 39)",
         }
       }

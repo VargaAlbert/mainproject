@@ -3,7 +3,7 @@
 import React from 'react';
 import { useShopContext } from '@/services/providers/ShopContext';
 
-import { Drawer } from '@mui/material';
+import { Drawer, Paper } from '@mui/material';
 
 export default function TemporaryDrawer({ children }: {
     children: React.ReactNode;
@@ -19,7 +19,9 @@ export default function TemporaryDrawer({ children }: {
                         open={userInterfaceDisplay.DRAWER[anchor]}
                         onClose={toggleDrawer(anchor, false)}
                     >
-                        {children}
+                        <Paper className='bg-background-primary h-full' >
+                            {children}
+                        </Paper>
                     </Drawer>
                 </React.Fragment>
             ))}

@@ -59,8 +59,8 @@ export default function ProductCartCard({ id, quantity }: CartItemT) {
 
                 <CardContent className="flex-1">
                     <Typography component="div" className='flex justify-between'>
-                        <Typography>
-                            <p className='text-xs'>{product}</p>
+                        <Typography className='text-xs'>
+                            {product}
                         </Typography>
                         <Tooltip title="Törlés">
                             <IconButton onClick={deleteIlem} color="inherit" size="medium" className="p-0 h-8">

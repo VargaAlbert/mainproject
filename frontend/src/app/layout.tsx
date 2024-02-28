@@ -13,7 +13,7 @@ import AppFooter from "@/components/feature/footer/AppFooter";
 import "../style/globals.scss"
 
 export const metadata: Metadata = {
-  title: "ALBIHORGÁSZBOLT",
+  title: "ALBI Horgászbolt",
   description: "ALBIHORGÁSZBOLT e-kereskedelmi webáruház",
 };
 

@@ -26,7 +26,7 @@ dotenv.config();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const app = express();
-const PORT = process.env.PORT || 5005;
+const PORT = process.env.PORT || 5000;
 
 /**
  * Connects to the MongoDB database.
@@ -98,6 +98,9 @@ app.use(errorHandler);
 handleMongoDBConnection('connected', 'MongoDB connected successfully!');
 handleMongoDBConnection('error', 'MongoDB connection error');
 handleMongoDBConnection('disconnected', 'MongoDB disconnected');
+
+
+
 
 /**
  * Listens for the MongoDB connection and starts the server.
